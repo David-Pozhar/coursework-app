@@ -41,6 +41,13 @@ export const categoryModule = {
                 editableCategory.title = title;
                 editableCategory.description = description;
             }
+        },
+        REMOVE_CATEGORY(state: CategoryState, id: string) {
+            const index = state.categories.findIndex(category => category._id === id);
+            
+            if (index) {
+                state.categories.splice(index, 1);
+            }
         }
     },
     actions: {
@@ -76,6 +83,15 @@ export const categoryModule = {
 
             if (res && res.status === 200 && res.data) {
                 return res.data;
+            }
+
+            return res;
+        },
+
+        async DELETE_CATEGORY({commit}: {commit : Commit}, id: string) {
+            const res = await CategoryAPI.deleteCategory(id);
+            if (res && res.status === 200 && res.data) {
+                commit('REMOVE_CATEGORY', id);
             }
 
             return res;

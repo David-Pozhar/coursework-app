@@ -15,12 +15,16 @@ export const CategoryAPI = {
         return DefaultAPIInstance.post(url, data);
     },
     updateCategory(id: string, title: string, description: string): Promise<AxiosResponse<IConfirm>> {
-        const data = {title, description}
+        const data = {title, description};
         const url = `categories/${id}`;
         return DefaultAPIInstance.patch(url, data);
     },
     category(id: string): Promise<AxiosResponse<ICategory>> {
         const url = `categories/${id}`;
         return DefaultAPIInstance.get(url);
+    },
+    deleteCategory(id: string): Promise<AxiosResponse<IConfirm>> {
+        const url = `categories/${id}`;
+        return DefaultAPIInstance.delete(url);
     }
 }

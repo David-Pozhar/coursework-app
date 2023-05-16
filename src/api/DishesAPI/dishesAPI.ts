@@ -13,8 +13,8 @@ export const DishesAPI = {
         const data = {title, description, category, price};
         return DefaultAPIInstance.post(url, data);
     },
-    updateDish(id: string, title: string, description: string): Promise<AxiosResponse<IConfirm>> {
-        const data = {title, description}
+    updateDish(id: string, title: string, description: string, price: number, category: string): Promise<AxiosResponse<IConfirm>> {
+        const data = {title, description, price, category};
         const url = `dishes/${id}`;
         return DefaultAPIInstance.patch(url, data);
     },

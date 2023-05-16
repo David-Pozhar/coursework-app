@@ -69,6 +69,12 @@
                     </button>
                 </router-link>
             </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <button class="h-10 px-5 text-red-700 transition-colors duration-150 border border-red-500 rounded-lg focus:shadow-outline hover:bg-red-500 hover:text-red-100"
+                        @click="confirmDelete(category._id)">
+                    Delete category
+                </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -77,6 +83,7 @@
 
 <script lang="ts">
     import { ICategory } from "@/models/ICategory";
+import { IDish } from "@/models/IDish";
     import { defineComponent } from "vue";
     import { mapActions, mapGetters } from "vuex";
     import Header from '../../Home/Header/Header.vue';
@@ -94,14 +101,26 @@
                 'CATEGORIES'
             ]) as {CATEGORIES: () => ICategory[]},
 
-            filteredCategories() {
-                return this.CATEGORIES.filter(category => category.title.toLowerCase().includes(this.search.toLowerCase()));
+            filteredCategories(): ICategory[] {
+                return this.CATEGORIES.filter((category: ICategory) => category.title.toLowerCase().includes(this.search.toLowerCase()));
             },  
         },
         methods: {
             ...mapActions('category',[
                 'GET_CATEGORIES_FROM_API',
+                'DELETE_CATEGORY'
             ]),
+            confirmDelete(id: string): void {
+                if (window.confirm("Are you sure you want to delete the dish?")) {
+                    this.deleteCategory(id);
+                }
+            },
+            async deleteCategory(id: string) {
+                const res = await this.DELETE_CATEGORY(id);
+                if (res.data) {
+                    this.$router.push({name: 'dashboardCategories'});
+                }
+            }
         },
         mounted(): void {
             this.GET_CATEGORIES_FROM_API();

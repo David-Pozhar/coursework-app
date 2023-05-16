@@ -57,7 +57,7 @@
               <div class="text-sm text-gray-900">{{ dish.price }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ dish.category.title }}</div>
+              <div v-if="dish.category" class="text-sm text-gray-900">{{ dish.category.title }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
                 <router-link :to="{name: 'dashboardUpdateDish', params:{id: dish._id}}">
@@ -106,7 +106,7 @@
                 'GET_PRODUCTS_FROM_API',
                 'DELETE_DISH',
             ]),
-            confirmDelete(id: string) {
+            confirmDelete(id: string): void {
                 if (window.confirm("Are you sure you want to delete the dish?")) {
                     this.deleteDish(id);
                 }

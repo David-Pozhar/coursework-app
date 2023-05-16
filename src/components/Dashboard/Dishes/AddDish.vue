@@ -3,7 +3,7 @@
     <div class="flex flex-col items-center justify-center h-full">
         <form @submit.prevent="onSubmit"
             class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md">
-            <h2 class="text-4xl font-bold text-gray-700 mb-8">Create Category</h2>
+            <h2 class="text-4xl font-bold text-gray-700 mb-8">Create Dish</h2>
             <div class="mb-6">
                 <label class="block text-gray-700 font-bold mb-2 text-xl" for="title">
                     Title
@@ -44,7 +44,7 @@
                     Add Dish
                 </button>
             </div>
-            <ul v-if="errors.length" class="text-red-500">
+            <ul v-if="errors.length" class="flex flex-col items-center justify-center mt-1 text-red-500 text-sm">
                     <li 
                         v-for="error in errors" 
                         :key="error">

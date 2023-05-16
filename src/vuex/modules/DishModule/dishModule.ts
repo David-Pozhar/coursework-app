@@ -22,11 +22,20 @@ export const dishModule = {
         SET_NEW_DISH(state: DishState, data: IDish) {
             state.dishes.push(data);
         },
-        EDIT_DISH(state: DishState, {id, title, description} : {id: string, title: string, description: string}) {
-            const editableDish = state.dishes.find(({_id}) => _id === id);
+        EDIT_DISH(state: DishState, {id, title, description, price, categoryId} : {id: string, title: string, description: string, price: number, categoryId: string}) {
+            let editableDish = state.dishes.find(({_id}) => _id === id);
             if (editableDish) {
-                editableDish.title = title;
-                editableDish.description = description;
+                editableDish = {
+                    ...editableDish,
+                    title: title,
+                    description: description,
+                    price: price,
+                    category: {
+                        ...editableDish.category, 
+                        _id: categoryId,
+                    }
+
+                }
             }
         },
         REMOVE_DISH(state: DishState, id: string) {
@@ -57,10 +66,10 @@ export const dishModule = {
             return res;
         },
 
-        async UPDATE_DISH({commit}: {commit : Commit}, {id, title, description} : {id: string, title: string, description: string}) {
-            const res = await DishesAPI.updateDish(id, title, description);
+        async UPDATE_DISH({commit}: {commit : Commit}, {id, title, description, price, categoryId} : {id: string, title: string, description: string, price: number, categoryId: string}) {
+            const res = await DishesAPI.updateDish(id, title, description, price, categoryId);
             if (res && res.status === 200 && res.data) {
-                commit('EDIT_DISH', {id, title, description});
+                commit('EDIT_DISH', {id, title, description, price, categoryId});
             }
 
             return res;
