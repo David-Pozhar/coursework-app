@@ -10,6 +10,8 @@ import DashboardCategories from '../components/Dashboard/Categories/Categories.v
 import DashboardAddCategory from '../components/Dashboard/Categories/AddCategory.vue'
 import DashboardUpdateCategory from '../components/Dashboard/Categories/UpdateCategory.vue'
 import DashboardDishes from '../components/Dashboard/Dishes/Dishes.vue'
+import DashboardAddDish from '../components/Dashboard/Dishes/AddDish.vue'
+import DashboardUpdateDish from '../components/Dashboard/Dishes/UpdateDish.vue'
 import DashboardOrders from '../components/Dashboard/Orders/Orders.vue'
 import Home from '../components/Home/Home.vue'
 import {UserRoles} from '../vuex/modules/AuthModule/authModule'
@@ -98,6 +100,19 @@ const routes: Array<RouteRecordRaw> = [
         name: 'dashboardDishes',
         component: DashboardDishes,
         //beforeEnter: managerAuthGuard
+    },
+    {
+        path: '/dashboard/addDish',
+        name: 'dashboardAddDish',
+        component: DashboardAddDish,
+        //beforeEnter: managerAuthGuard
+    },
+    {
+        path: '/dashboard/updateDish/:id',
+        name: 'dashboardUpdateDish',
+        component: DashboardUpdateDish,
+        //beforeEnter: managerAuthGuard
+        props: true,
     },
     {
         path: '/dashboard/orders',

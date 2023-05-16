@@ -52,7 +52,7 @@
             ]),
             ...mapGetters('category',[
                 'CATEGORIES'
-            ]),
+            ]) as {CATEGORIES: () => ICategory[]},
 
             filterProductsBySelectedCategory() : IDish[] {
                 if (this.sortedProducts.length) {

@@ -1,10 +1,8 @@
 import { LoginAPIInstance, DefaultAPIInstance } from "..";
 import { AxiosResponse } from "axios";
 import { ICategory } from '@/models/ICategory';
+import { IConfirm } from "@/models/IConfirm";
 
-interface IConfirm {
-    success: boolean
-}
 
 export const CategoryAPI = {
     categories(): Promise<AxiosResponse<ICategory[]>> {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <Header />
-        <div class="flex items-center space-x-4 mb-4 mt-8">
+        <div class="flex items-center space-x-4 mb-4 mt-8 ml-4">
         <div class="w-1/3">
           <label for="search" class="sr-only">Search</label>
           <input type="text"

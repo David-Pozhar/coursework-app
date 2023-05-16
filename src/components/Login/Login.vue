@@ -49,7 +49,7 @@
             return {
                 email: '',
                 password: '',
-                errors: [] as Array<unknown>
+                errors: [] as Array<string>
             }
         },
         methods: {

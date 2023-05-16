@@ -22,16 +22,24 @@ export const categoryModule = {
     },
     mutations: {
         SET_CATEGORIES_TO_STATE(state: CategoryState, data: CategoryState) {
+            const allCategory = {
+                _id: '0',
+                title: 'Select Category',
+                description: '',
+                createdAt: '2023-05-02T11:17:26.623Z',
+                updatedAt: '2023-05-02T11:17:26.623Z'
+            }
+            data.categories.unshift(allCategory);
             state.categories = data.categories;
         },
         SET_NEW_CATEGORY(state: CategoryState, data: ICategory) {
             state.categories.push(data);
         },
         EDIT_CATEGORY(state: CategoryState, {id, title, description} : {id: string, title: string, description: string}) {
-            const editableDish = state.categories.find(({_id}) => _id === id);
-            if (editableDish) {
-                editableDish.title = title;
-                editableDish.description = description;
+            const editableCategory = state.categories.find(({_id}) => _id === id);
+            if (editableCategory) {
+                editableCategory.title = title;
+                editableCategory.description = description;
             }
         }
     },
@@ -67,7 +75,6 @@ export const categoryModule = {
             const res = await CategoryAPI.category(id);
 
             if (res && res.status === 200 && res.data) {
-                console.log(res.data);
                 return res.data;
             }
 
