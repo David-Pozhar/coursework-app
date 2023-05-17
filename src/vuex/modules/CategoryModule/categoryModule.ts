@@ -23,7 +23,7 @@ export const categoryModule = {
     mutations: {
         SET_CATEGORIES_TO_STATE(state: CategoryState, data: CategoryState) {
             const allCategory = {
-                _id: '0',
+                _id: '1',
                 title: 'Select Category',
                 description: '',
                 createdAt: '2023-05-02T11:17:26.623Z',

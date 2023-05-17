@@ -1,24 +1,21 @@
 <template>
-    <div class="menu">
-        <router-link :to="{name: 'cart'}">
-            <div class="cart">Cart: {{ CART.length }}</div>
-        </router-link>
+    <Header/>
 
-        <h1>Menu</h1>
-        <Select 
-            :selected="selected"
-            :options="CATEGORIES"
-            @select="sortByCategories"
+    <div class="text-black">
+      <h1 class="flex items-center justify-center text-4xl font-bold mt-8">Menu</h1>
+      <Select class="mt-4"
+        :selected="selected"
+        :options="CATEGORIES"
+        @select="sortByCategories"
+      />
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+        <MenuItem
+          v-for="product in filterProductsBySelectedCategory"
+          :key="product._id"
+          :product_data="product"
+          @addToCart="addToCart"
         />
-        <div class="menu_list">
-            <MenuItem 
-                v-for="product in filterProductsBySelectedCategory"
-                :key="product._id"
-                :product_data="product"
-                @addToCart="addToCart"
-            />
-        </div>
-        
+      </div>
     </div>
 </template>
 
@@ -29,24 +26,21 @@
     import { IDish } from '@/models/IDish'
     import Select from '../Select/Select.vue'
     import {ICategory} from '../../models/ICategory'
+    import Header from '../Home/Header/Header.vue';
 
     export default defineComponent({
         name: 'Menu',
         components: {
-            MenuItem, Select
+            MenuItem, Select, Header
         },
         props: {},
         data() {
             return {
-                selected: 'All',
+                selected: 'Select Category',
                 sortedProducts: [] as IDish[]
             }
         },
         computed: {
-            ...mapGetters([
-                'CART',
-                
-            ]),
             ...mapGetters('dishes',[
                 'PRODUCTS',
             ]),
@@ -57,7 +51,7 @@
             filterProductsBySelectedCategory() : IDish[] {
                 if (this.sortedProducts.length) {
                     return this.sortedProducts;
-                } else if (this.selected == 'All') {
+                } else if (this.selected == 'Select Category') {
                     return this.PRODUCTS;
                 } else {
                     return [];
@@ -81,7 +75,7 @@
                 this.sortedProducts = [];
 
                 this.PRODUCTS.forEach((element : IDish) => {
-                    if (element.category._id === category._id) {
+                    if (element.category && element.category._id === category._id) {
                         this.sortedProducts.push(element);
                     }
                 });
@@ -95,28 +89,6 @@
     });
 </script>
 
-<style scoped>
+<style>
 
-    h1 {
-        text-align: center;
-    }
-
-    .menu {
-        padding: 40px;
-    }
-
-    .menu_list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .cart {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        padding: 16px;
-        border: 1px solid grey;
-    }
 </style>

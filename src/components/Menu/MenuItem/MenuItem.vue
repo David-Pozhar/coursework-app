@@ -1,19 +1,22 @@
 <template>
-    <div class="menu_item">
-
-        <img v-if="product_data.imageUrl" :src="product_data.imageUrl" alt="img">
-        <img v-else src="" alt="img">
-        <p class="menu_item_name">{{ product_data.title }}</p>
-        <p class="menu_item_desc">{{ product_data.description }}</p>
-        <p class="menu_item_price">{{ product_data.price }}</p>
-
-        <button 
-            class="add_to_cart_btn"
-            @click="addToCart"
-        >Add to cart
-        </button>
+    <div class="p-4 m-4 rounded-lg bg-slate-50">
+        <div class="flex flex-col items-center justify-between">
+            <div class="w-full flex items-center justify-center">
+                <img v-if="product_data.imageUrl" :src="product_data.imageUrl" alt="img" class="w-40 h-40 rounded-xl object-covers">
+                <img v-else src="" alt="img">
+            </div>
+                <p class="text-lg font-bold text-gray-900">{{ product_data.title }}</p>
+                <p class="text-gray-600 mt-2">{{ product_data.description }}</p>
+                <p class="text-gray-900 font-semibold mt-2">Price: {{ product_data.price }}</p>
+                <button
+                class="w-full flex items-center justify-center mt-2 px-4 py-3 bg-gradient-to-br from-amber-400 to-amber-500 rounded-lg hover:shadow-lg transition-all ease-in-out duration-100 text-white font-bold"
+                @click="addToCart"
+                >
+                Add to Cart
+                </button>
+        </div>
     </div>
-</template>
+  </template>
 
 <script lang="ts">
     import { defineComponent, PropType } from 'vue';
@@ -39,9 +42,5 @@
 </script>
 
 <style>
-    .menu_item {
-        flex-basis: 25%;
-        box-shadow: 0 0 8px 0 #e0e0e0;
-        margin: 10px;
-    }
+
 </style>

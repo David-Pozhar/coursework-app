@@ -19,6 +19,7 @@
                     class="account_and_order flex items-center justify-center space-x-4">
                     <router-link to='/cart' class='mr-4 relative'>
                         <img src='../../../assets/icons/cart.svg' alt="cart"/>
+
                     </router-link>
                     <router-link to='/login'>Log In</router-link>
                     <router-link to='/register'>Sign Up</router-link>
@@ -28,6 +29,10 @@
                     class="account_and_order flex items-center justify-center space-x-4">
                     <router-link to='/cart' class='mr-4 relative'>
                         <img src='../../../assets/icons/cart.svg' alt="cart"/>
+                        <div v-if="CART.length"
+                            class="rounded-full bg-yellow-400 text-white inline-flex justify-center items-center w-full absolute -top-1 -right-1"
+                             >{{ CART.length }}
+                        </div>
                     </router-link>
                     <router-link to='/'
                         @click="Logout"
@@ -41,7 +46,8 @@
 
 <script lang="ts">
     import { defineComponent } from 'vue';
-import { mapActions, mapGetters } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
+
     export default defineComponent({
         name: 'Header',
         data() {
@@ -51,6 +57,9 @@ import { mapActions, mapGetters } from 'vuex';
         computed: {
             ...mapGetters('auth',[
                 'GET_USER_ROLE'
+            ]),
+            ...mapGetters([
+                'CART',
             ]),
             checkUserRole(): string {
                 return this.GET_USER_ROLE;
