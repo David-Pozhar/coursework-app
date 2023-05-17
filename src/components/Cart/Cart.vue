@@ -1,37 +1,51 @@
 <template>
-    <div class="cart_wrapper">
-        <router-link :to="{name: 'menu'}">
-            <div class="back_to_menu">Back to menu</div>
+    <Header />
+
+    <div class="bg-gray-100 px-4 py-8">
+        <router-link :to="{ name: 'menu' }">
+            <div class="text-gray-500 hover:text-gray-700 cursor-pointer mb-4">
+                Back to Menu
+            </div>
         </router-link>
 
-        <h1>Cart</h1>
+        <h1 class="text-3xl font-bold mb-6">Cart</h1>
+
         <CartItem
             v-for="(item, index) in CART"
-            :key="item.id" 
+            :key="item._id"
             :cart_item_data="item"
             @deleteFromCart="deleteFromCart(index)"
             @incrementQuantity="incrementQuantity(index)"
             @decrementQuantity="decrementQuantity(index)"
         />
 
-        <div class="cart_total">
-            <p class="total_amount">Total: </p>
-            <p>{{ getTotalCost }}</p>
+        <div class="cart_total bg-white rounded-lg shadow-md p-4 flex items-center justify-between mt-6">
+            <p class="total_amount text-lg font-semibold">Total:</p>
+            <p class="text-lg font-semibold">{{ getTotalCost }}</p>
+        </div>
+
+        <div class="flex justify-center items-center mt-8">
+            <router-link to="/checkout">
+                <button class="w-60 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg text-xl">
+                    Checkout
+                </button>
+            </router-link>
         </div>
     </div>
-</template>
+  </template>
 
 <script lang="ts">
     import { defineComponent } from 'vue';
     import CartItem from './CartItem.vue'
     import { ICart } from '@/models/ICart';
     import { mapActions, mapGetters } from 'vuex';
+    import Header from '../Home/Header/Header.vue';
 
 
     export default defineComponent({
         name: 'Cart',
         components: {
-            CartItem
+            CartItem, Header
         }, 
         methods: {
             ...mapActions([
@@ -53,7 +67,7 @@
         computed: {
             ...mapGetters([
                 'CART'
-            ]),
+            ]) as {CART: () => ICart[]},
 
             getTotalCost(): number {
                 if (this.CART.length) {
@@ -75,27 +89,5 @@
 </script>
 
 <style>
-    .back_to_menu {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        padding: 16px;
-        border: 1px solid grey;
-    }
-
-    .cart_total {
-        margin-top: 50px;
-        display: flex;
-        background-color: #7CFC00;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        padding: 16px;
-        justify-content: center;
-        color: white;
-        position: fixed;
-    }
-    .total_amount {
-        margin-right: 16px;
-    }
+   
 </style>

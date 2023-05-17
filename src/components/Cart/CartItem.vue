@@ -1,20 +1,37 @@
 <template>
-    <div class="cart-item">
-        <img src="" alt="img">
-        <div class="cart-item-info">
-            <p class="menu_item_name">{{ cart_item_data.title }}</p>
-            <p class="menu_item_desc">{{ cart_item_data.description }}</p>
-            <p class="menu_item_price">{{ cart_item_data.price }}</p>
-            <button
+    <div class="flex items-center border-b border-gray-200 py-4">
+        <img class="w-16 h-16 object-cover rounded-md mr-4"
+            :src="cart_item_data.imageUrl"
+            :alt="cart_item_data.title"
+        />
+        <div class="flex-1">
+            <p class="text-xl font-semibold text-gray-800 mb-2">
+                {{ cart_item_data.title }}
+            </p>
+            <p class="text-gray-600 mb-2">
+                {{ cart_item_data.description }}
+            </p>
+            <p class="text-gray-800 font-semibold">
+                {{ cart_item_data.price }}
+            </p>
+            <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded mt-2"
                 @click="deleteFromCart"
-            >Delete
+            >
+                Delete
             </button>
         </div>
-
-        <div class="cart-item-quantity">
-            <span class="quantity_btn" @click="incrementQuantity">+</span>
-            <p>Quantity: {{ cart_item_data.quantity }}</p>
-            <span class="quantity_btn" @click="decrementQuantity">-</span>
+        <div class="flex items-center">
+            <span class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded cursor-pointer"
+                @click="incrementQuantity"
+            >
+                +
+            </span>
+            <p class="text-gray-800 font-semibold mx-4">Quantity: {{ cart_item_data.quantity }}</p>
+            <span class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded cursor-pointer"
+                @click="decrementQuantity"
+            >
+                -
+            </span>
         </div>
     </div>
 </template>
@@ -52,17 +69,5 @@
 </script>
 
 <style>
-    .cart-item {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 0 8px 0 #e0e0e0;
-        padding: 16px;
-        margin-bottom: 16px;
-    }
-
-    .quantity_btn {
-        cursor: pointer;
-    }
+    
 </style>
