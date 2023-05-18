@@ -10,6 +10,7 @@ import { categoryModule } from './modules/CategoryModule/categoryModule'
 import { dishModule } from './modules/DishModule/dishModule'
 import { dashboardModule } from './modules/DashboardModule/dashboardModule'
 import { usersModule } from './modules/DashboardModule/UsersModule/usersModule'
+import { ordersModule } from './modules/OrderModule/orderModule'
 
 export default interface State {
     products: IDish[],
@@ -30,6 +31,7 @@ export const store = createStore<State>({
         category: categoryModule,
         dishes: dishModule,
         //dashboard: dashboardModule,
-        users: usersModule
+        users: usersModule,
+        orders: ordersModule
     }
 })

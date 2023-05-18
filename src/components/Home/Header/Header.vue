@@ -19,7 +19,10 @@
                     class="account_and_order flex items-center justify-center space-x-4">
                     <router-link to='/cart' class='mr-4 relative'>
                         <img src='../../../assets/icons/cart.svg' alt="cart"/>
-
+                        <div v-if="CART.length"
+                            class="rounded-full bg-yellow-400 text-white inline-flex justify-center items-center w-full absolute -top-1 -right-1"
+                             >{{ CART.length }}
+                        </div>
                     </router-link>
                     <router-link to='/login'>Log In</router-link>
                     <router-link to='/register'>Sign Up</router-link>

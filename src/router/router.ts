@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
+import { RouteRecordRaw, createRouter, createWebHistory, RouteLocationNormalized, NavigationGuardNext  } from 'vue-router'
 import Menu from '../components/Menu/Menu.vue'
 import Cart from '../components/Cart/Cart.vue'
 import Login from '../components/Login/Login.vue'
@@ -18,21 +18,21 @@ import {UserRoles} from '../vuex/modules/AuthModule/authModule'
 
 const isAuthorized = localStorage.hasOwnProperty('token')
 
-const authGuard = (next: Function) => {
+const authGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     if (!isAuthorized) {
-        next ({name: 'login'})
+        next({ name: 'login' });
     } else {
-        next()
+        next();
     }
 }
 
-const managerAuthGuard = (next: Function) => {
+const managerAuthGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     if (!isAuthorized) {
-        next({name: 'login'})
+        next({name: 'login'});
     } else if (localStorage.getItem('userRole') !== UserRoles.Admin) {
-        next({name: 'menu'})
+        next({name: 'menu'});
     } else {
-        next()
+        next();
     }
 }
 
@@ -51,7 +51,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/cart',
         name: 'cart',
         component: Cart,
-        //beforeEnter: authGuard,
+        // beforeEnter: authGuard,
         props: true
     },
     {
@@ -68,57 +68,57 @@ const routes: Array<RouteRecordRaw> = [
         path: '/dashboard',
         name: 'dashboard',
         component: Dashboard,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/users',
         name: 'dashboardUsers',
         component: DashboardUsers,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/categories',
         name: 'dashboardCategories',
         component: DashboardCategories,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/addCategory',
         name: 'dashboardAddCategory',
         component: DashboardAddCategory,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/updateCategory/:id',
         name: 'dashboardUpdateCategory',
         component: DashboardUpdateCategory,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard,
         props: true,
     },
     {
         path: '/dashboard/dishes',
         name: 'dashboardDishes',
         component: DashboardDishes,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/addDish',
         name: 'dashboardAddDish',
         component: DashboardAddDish,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
     {
         path: '/dashboard/updateDish/:id',
         name: 'dashboardUpdateDish',
         component: DashboardUpdateDish,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard,
         props: true,
     },
     {
         path: '/dashboard/orders',
         name: 'dashboardOrders',
         component: DashboardOrders,
-        //beforeEnter: managerAuthGuard
+        beforeEnter: managerAuthGuard
     },
 ]
 
