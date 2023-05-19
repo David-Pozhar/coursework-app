@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { RouteRecordRaw, createRouter, createWebHistory, RouteLocationNormalized, NavigationGuardNext  } from 'vue-router'
 import Menu from '../components/Menu/Menu.vue'
 import Cart from '../components/Cart/Cart.vue'
+import Checkout from '../components/Checkout/Checkout.vue'
 import Login from '../components/Login/Login.vue'
 import Register from '../components/Register/Register.vue'
 import Dashboard from '../components/Dashboard/Dashboard.vue'
@@ -53,6 +54,13 @@ const routes: Array<RouteRecordRaw> = [
         component: Cart,
         // beforeEnter: authGuard,
         props: true
+    },
+    {
+        path: '/checkout',
+        name: 'checkout',
+        component: Checkout,
+        // beforeEnter: authGuard,
+        //props: true
     },
     {
         path: '/login',

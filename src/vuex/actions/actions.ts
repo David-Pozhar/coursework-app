@@ -15,5 +15,8 @@ export default {
     },
     DECREMENT_QUANTITY({commit} : {commit: Commit}, index : number) {
         commit('DECREMENT_QUANTITY', index)
+    },
+    DELETE_EVERYTHING_FROM_CART({commit} : {commit: Commit}) {
+        commit('REMOVE_EVERYTHING_FROM_CART');
     }
 }

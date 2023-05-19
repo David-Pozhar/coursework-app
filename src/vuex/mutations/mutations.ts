@@ -22,6 +22,9 @@ export default {
     DELETE_PRODUCT_FROM_CART: (state : State, index: number) => {
         state.cart.splice(index, 1)
     },
+    REMOVE_EVERYTHING_FROM_CART: (state: State) => {
+        state.cart = [];
+    },
     INCREMENT_QUANTITY: (state : State, index: number) => {
         state.cart[index].quantity += 1
     },

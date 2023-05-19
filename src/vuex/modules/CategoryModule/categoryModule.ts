@@ -2,6 +2,7 @@ import { ICategory } from "@/models/ICategory"
 import { ActionContext, Commit } from "vuex"
 import { CategoryAPI } from "@/api/CategoryAPI/categoryAPI"
 import State from '../../store'
+import { AxiosResponse } from "axios"
 
 interface CategoryState {
     categories: ICategory[]
@@ -21,16 +22,18 @@ export const categoryModule = {
         },
     },
     mutations: {
-        SET_CATEGORIES_TO_STATE(state: CategoryState, data: CategoryState) {
-            const allCategory = {
-                _id: '1',
-                title: 'Select Category',
-                description: '',
-                createdAt: '2023-05-02T11:17:26.623Z',
-                updatedAt: '2023-05-02T11:17:26.623Z'
-            }
-            data.categories.unshift(allCategory);
-            state.categories = data.categories;
+        SET_CATEGORIES_TO_STATE(state: CategoryState, {res, extraCategory} : {res: AxiosResponse<CategoryState>, extraCategory: boolean}) {
+            if (extraCategory) {
+                const allCategory = {
+                    _id: '1',
+                    title: 'Select Category',
+                    description: '',
+                    createdAt: '2023-05-02T11:17:26.623Z',
+                    updatedAt: '2023-05-02T11:17:26.623Z'
+                }
+                res.data.categories.unshift(allCategory);
+            }   
+            state.categories = res.data.categories;
         },
         SET_NEW_CATEGORY(state: CategoryState, data: ICategory) {
             state.categories.push(data);
@@ -51,10 +54,10 @@ export const categoryModule = {
         }
     },
     actions: {
-        async GET_CATEGORIES_FROM_API({commit} : {commit: Commit}) {
+        async GET_CATEGORIES_FROM_API({commit} : {commit: Commit}, extraCategory : boolean) {
             const res = await CategoryAPI.categories();
             if (res && res.status === 200 && res.data) {
-                commit('SET_CATEGORIES_TO_STATE', res.data);
+                commit('SET_CATEGORIES_TO_STATE', {res, extraCategory});
             }
 
             return res;

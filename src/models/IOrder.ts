@@ -1,7 +1,13 @@
 import { IUser } from "./IUser"
+import { IDish } from "./IDish"
 
-interface orderItem {
-    dish: string
+export interface OrderCreation {
+    amount: number
+    dishId: string
+}
+
+export interface OrderItem {
+    dish: IDish
     amount: number
     price: number
     _id: string
@@ -9,7 +15,7 @@ interface orderItem {
 
 export interface IOrder {
     user: IUser,
-    orderItems: orderItem[],
+    orderItems: OrderItem[],
     totalPrice: number
     isPaid: boolean
     _id: string

@@ -123,7 +123,7 @@ import { IDish } from "@/models/IDish";
             }
         },
         mounted(): void {
-            this.GET_CATEGORIES_FROM_API();
+            this.GET_CATEGORIES_FROM_API(false);
         }
     })
 </script>

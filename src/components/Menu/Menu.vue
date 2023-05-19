@@ -84,7 +84,7 @@
         },
         mounted(): void {
             this.GET_PRODUCTS_FROM_API();
-            this.GET_CATEGORIES_FROM_API();
+            this.GET_CATEGORIES_FROM_API(true);
         }
     });
 </script>

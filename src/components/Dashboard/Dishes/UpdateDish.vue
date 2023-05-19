@@ -135,7 +135,7 @@
             }
         },
         async mounted() {
-            this.GET_CATEGORIES_FROM_API();
+            this.GET_CATEGORIES_FROM_API(true);
 
             const dish = await this.GET_ONE_DISH(this.id);
             this.title = dish.title;
