@@ -1,20 +1,27 @@
 <template>
     <div>
         <Header />
-        <div class="flex items-center space-x-4 mb-4 mt-8 ml-4">
-        <div class="w-1/3">
-          <label for="search" class="sr-only">Search</label>
-          <input type="text"
-                id="search"
-                v-model="search"
-                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                placeholder="Search by Title">
+
+        <div class="container py-8 ml-2">
+            <router-link :to="{ name: 'dashboard' }" class="text-gray-500 hover:text-gray-700 cursor-pointer mb-4">
+                Back to Dashboard
+            </router-link>
         </div>
-        <router-link to="/dashboard/addDish">
-            <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                Add dish
-            </button>
-        </router-link>
+
+        <div class="flex items-center space-x-4 mb-4 mt-8 ml-2">
+            <div class="w-1/3">
+                <label for="search" class="sr-only">Search</label>
+                <input type="text"
+                        id="search"
+                        v-model="search"
+                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        placeholder="Search by Title">
+            </div>
+            <router-link to="/dashboard/addDish">
+                <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    Add dish
+                </button>
+            </router-link>
       </div>
       <table class="min-w-full divide-y divide-gray-200">
         <thead>

@@ -21,16 +21,16 @@
             </button>
         </div>
         <div class="flex items-center">
-            <span class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded cursor-pointer"
-                @click="incrementQuantity"
-            >
-                +
-            </span>
-            <p class="text-gray-800 font-semibold mx-4">Quantity: {{ cart_item_data.quantity }}</p>
-            <span class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded cursor-pointer"
-                @click="decrementQuantity"
+            <span class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-3 rounded cursor-pointer w-10 h-10 text-center"
+                    @click="decrementQuantity"
             >
                 -
+            </span>
+            <p class="text-gray-800 font-semibold mx-4">Quantity: {{ cart_item_data.quantity }}</p>
+            <span class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-3 rounded cursor-pointer w-10 h-10 text-center"
+                    @click="incrementQuantity"
+            >
+                +
             </span>
         </div>
     </div>

@@ -3,7 +3,7 @@
 
     <div class="text-black">
       <h1 class="flex items-center justify-center text-4xl font-bold mt-8">Menu</h1>
-      <Select class="mt-4"
+      <Select class="mt-4 ml-2"
         :selected="selected"
         :options="CATEGORIES"
         @select="sortByCategories"

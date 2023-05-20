@@ -15,6 +15,10 @@
                     </div>
                     <p class="text-lg font-semibold">Price: {{ order.price }}</p>
                 </div>
+                <div class="flex justify-center items-center mt-6">
+                    <p class="text-lg font-semibold">Total:</p>
+                    <p class="text-lg font-semibold ml-2">{{ order_data.totalPrice }}</p>
+                </div>
             </div>
             <div class="flex justify-center mt-4">
                 <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg" 

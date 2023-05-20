@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-  </template>
+</template>
   
   <script lang="ts">
     import Header from '../Home/Header/Header.vue';
@@ -126,7 +126,6 @@
                     const data = {orderItems: this.orderItems}
                     const res = await this.CREATE_ORDER(data);
                     if (res.data) {
-                        console.log('order created')
                         this.showConfirmationModal = false;
                         this.$router.push({name: 'home'});
                         this.DELETE_EVERYTHING_FROM_CART();

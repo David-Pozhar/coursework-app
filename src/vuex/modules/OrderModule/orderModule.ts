@@ -20,7 +20,7 @@ export const ordersModule = {
             state.orders = data.orders;
         },
         SET_NEW_ORDER(state: OrderState, data: IOrder) {
-            state.orders.push(data);
+            //state.orders.push(data);
         },
         EDIT_ORDER(state: OrderState, {id, isPaid} : {id: string, isPaid: boolean}) {
             const editableOrder = state.orders.find(({_id}) => _id === id);
@@ -42,7 +42,7 @@ export const ordersModule = {
             const res = await OrdersAPI.createOrder(orderItems);
 
             if (res && res.status === 200 && res.data) {
-                commit('SET_NEW_ORDER', res.data);
+               // commit('SET_NEW_ORDER', res.data);
             }
 
             return res;

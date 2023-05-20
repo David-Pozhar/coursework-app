@@ -26,7 +26,8 @@
 
         <div class="flex justify-center items-center mt-8">
             <router-link to="/checkout">
-                <button class="w-60 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg text-xl">
+                <button class="w-60 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg text-xl"
+                        :disabled="!CART.length">
                     Checkout
                 </button>
             </router-link>

@@ -1,7 +1,14 @@
 <template>
     <div>
         <Header />
-        <div class="flex items-center space-x-4 mb-4 mt-8 ml-4">
+
+        <div class="container py-8 ml-2">
+            <router-link :to="{ name: 'dashboard' }" class="text-gray-500 hover:text-gray-700 cursor-pointer mb-4">
+                Back to Dashboard
+            </router-link>
+        </div>
+
+        <div class="flex items-center space-x-4 mb-4 mt-8 ml-2">
         <div class="w-1/3">
           <label for="search" class="sr-only">Search</label>
           <input type="text"
@@ -19,10 +26,6 @@
       <table class="min-w-full divide-y divide-gray-200">
         <thead>
           <tr>
-            <th scope="col"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Id
-            </th>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Title
@@ -43,13 +46,14 @@
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Edit
             </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Delete Category
+            </th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           <tr v-for="category in filteredCategories" :key="category._id">
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ category._id }}</div>
-            </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ category.title }}</div>
             </td>

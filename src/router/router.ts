@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { store } from '@/vuex/store'
 import { RouteRecordRaw, createRouter, createWebHistory, RouteLocationNormalized, NavigationGuardNext  } from 'vue-router'
 import Menu from '../components/Menu/Menu.vue'
 import Cart from '../components/Cart/Cart.vue'
@@ -17,7 +18,15 @@ import DashboardOrders from '../components/Dashboard/Orders/Orders.vue'
 import Home from '../components/Home/Home.vue'
 import {UserRoles} from '../vuex/modules/AuthModule/authModule'
 
-const isAuthorized = localStorage.hasOwnProperty('token')
+
+const checkoutGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    if (store.state.cart.length) {
+        next();
+    } else {
+        next({name: 'cart'});
+    }
+}
+const isAuthorized = localStorage.hasOwnProperty('token');
 
 const authGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     if (!isAuthorized) {
@@ -31,7 +40,7 @@ const managerAuthGuard = (to: RouteLocationNormalized, from: RouteLocationNormal
     if (!isAuthorized) {
         next({name: 'login'});
     } else if (localStorage.getItem('userRole') !== UserRoles.Admin) {
-        next({name: 'menu'});
+        next({name: 'home'});
     } else {
         next();
     }
@@ -59,8 +68,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/checkout',
         name: 'checkout',
         component: Checkout,
-        // beforeEnter: authGuard,
-        //props: true
+        beforeEnter: [authGuard, checkoutGuard]
     },
     {
         path: '/login',
