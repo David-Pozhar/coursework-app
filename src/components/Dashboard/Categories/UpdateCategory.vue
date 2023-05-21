@@ -31,48 +31,48 @@
 </template>
 
 <script lang="ts">
-import Header from '@/components/Home/Header/Header.vue';
-import { defineComponent } from "vue";
-import { mapActions} from 'vuex';
+    import Header from '@/components/Home/Header/Header.vue';
+    import { defineComponent } from "vue";
+    import { mapActions} from 'vuex';
 
-export default defineComponent({
-    name: 'DashboardUpdateCategory',
-    components: { Header },
-    props: {
-        id: {
-            type: String
+    export default defineComponent({
+        name: 'DashboardUpdateCategory',
+        components: { Header },
+        props: {
+            id: {
+                type: String
+            },
         },
-    },
-    data() {
-        return {
-            title: '',
-            description: '',
-        }
-    },
-    computed: {},
-    methods: {
-        ...mapActions('category',[
-            'UPDATE_CATEGORY',
-            'GET_ONE_CATEGORY'
-        ]),
-        async onSubmit() {
-            try {
-                const data = {id: this.id, title: this.title, description: this.description};
-                const res = await this.UPDATE_CATEGORY(data);
-                if (res.data) {
-                    this.$router.push({name: 'dashboardCategories'});
-                }
-            } catch(e) {
-                console.log('oops');
+        data() {
+            return {
+                title: '',
+                description: '',
             }
+        },
+        computed: {},
+        methods: {
+            ...mapActions('category',[
+                'UPDATE_CATEGORY',
+                'GET_ONE_CATEGORY'
+            ]),
+            async onSubmit() {
+                try {
+                    const data = {id: this.id, title: this.title, description: this.description};
+                    const res = await this.UPDATE_CATEGORY(data);
+                    if (res.data) {
+                        this.$router.push({name: 'dashboardCategories'});
+                    }
+                } catch(e) {
+                    console.log('oops');
+                }
+            }
+        },
+        async mounted() {
+            const category = await this.GET_ONE_CATEGORY(this.id);
+            this.title = category.title;
+            this.description = category.description;
         }
-    },
-    async mounted() {
-        const category = await this.GET_ONE_CATEGORY(this.id);
-        this.title = category.title;
-        this.description = category.description;
-    }
-})
+    })
 </script>
 
 <style></style>

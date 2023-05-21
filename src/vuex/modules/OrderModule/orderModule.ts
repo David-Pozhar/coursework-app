@@ -38,6 +38,14 @@ export const ordersModule = {
             
             return res;
         },
+        async GET_USER_ORDERS(_ : ActionContext<State, State>, {userId} : {userId: string}) {
+            const res = await OrdersAPI.orders(userId);
+            if (res && res.status === 200 && res.data) {
+                console.log(res.data);
+                return res.data;
+            }
+            return res;
+        },
         async CREATE_ORDER({commit} : {commit: Commit}, {orderItems}: {orderItems: OrderCreation[]}) {
             const res = await OrdersAPI.createOrder(orderItems);
 
@@ -50,7 +58,6 @@ export const ordersModule = {
         async UPDATE_ORDER({commit}: {commit : Commit}, {id, isPaid} : {id: string, isPaid: boolean}) {
             const res = await OrdersAPI.updateOrder(id, isPaid);
             if (res && res.status === 200 && res.data) {
-                console.log(res.data);
                 commit('EDIT_ORDER', {id, isPaid});
             }
 

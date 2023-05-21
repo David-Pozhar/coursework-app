@@ -38,10 +38,10 @@
                         </div>
                     </router-link>
                     <router-link to='/'
-                        @click="Logout"
-                    >Logout
+                            @click="Logout"
+                        >Logout
                     </router-link>
-                    <router-link to='/'>My orders</router-link>
+                    <router-link :to="{name: 'myOrders'}">My orders</router-link>
                 </div>
             </div>
         </nav>

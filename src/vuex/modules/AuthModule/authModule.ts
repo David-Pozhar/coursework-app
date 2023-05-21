@@ -97,5 +97,14 @@ export const authModule = {
                 return res
             })
         },
+
+        async GET_USER_BY_TOKEN() {
+            const res = await AuthAPI.getUserByToken();
+            if (res && res.status === 200 && res.data) {
+                return res.data;
+            }
+
+            return res;
+        }
     }
 }

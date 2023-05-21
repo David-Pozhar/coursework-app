@@ -6,6 +6,7 @@ import Cart from '../components/Cart/Cart.vue'
 import Checkout from '../components/Checkout/Checkout.vue'
 import Login from '../components/Login/Login.vue'
 import Register from '../components/Register/Register.vue'
+import MyOrders from '../components/MyOrders/MyOrders.vue'
 import Dashboard from '../components/Dashboard/Dashboard.vue'
 import DashboardUsers from '../components/Dashboard/Users/Users.vue'
 import DashboardCategories from '../components/Dashboard/Categories/Categories.vue'
@@ -79,6 +80,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/register',
         name: 'register',
         component: Register
+    },
+    {
+        path: '/myOrders',
+        name: 'myOrders',
+        component: MyOrders
     },
     {
         path: '/dashboard',

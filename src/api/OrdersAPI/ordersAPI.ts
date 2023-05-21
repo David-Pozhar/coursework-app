@@ -4,9 +4,10 @@ import { IOrder, OrderCreation} from "@/models/IOrder";
 import { IConfirm } from "@/models/IConfirm";
 
 export const OrdersAPI = {
-    orders(): Promise<AxiosResponse<IOrder[]>> {
+    orders(userId?: string): Promise<AxiosResponse<IOrder[]>> {
         const url = '/orders';
-        return DefaultAPIInstance.get(url);
+        const queryParams = userId ? {params: {user: userId}} : undefined;
+        return DefaultAPIInstance.get(url, queryParams);
     },
     createOrder(orderItems: OrderCreation[]): Promise<AxiosResponse<IOrder>> {
         const url = 'orders';
