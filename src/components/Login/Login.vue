@@ -3,12 +3,7 @@
         <div class="rounded-lg max-w-md w-full flex flex-col items-center justify-center relative">
             <div class="absolute inset-0 transition duration-300 animate-pink blur gradient bg-gradient-to-tr from-rose-500 to-yellow-500"></div>
             <div class="p-10 rounded-xl z-10 w-full h-full bg-black">
-                <h5 class="text-3xl text-white">Login</h5>
-
-                <ul v-if="errors.length" class="text-red-500">
-                    <li v-for="error in errors" :key="error">{{ error }}</li>
-                </ul>
-
+                <h5 class="flex items-center justify-center text-3xl text-white">Login</h5>
                 <form @submit.prevent="onSubmit" 
                         class="w-full space-y-6">
                     <div>
@@ -32,6 +27,7 @@
                         class="w-full px-4 py-3 bg-gradient-to-br from-orange-400 to-orange-500 rounded-lg hover:shadow-lg transition-all ease-in-out duration-100 text-white font-bold"
                         >Login
                     </button>
+                    <Error :errors="errors"/>
                 </form>
             </div>
         </div>
@@ -41,9 +37,11 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import { mapActions } from 'vuex';
+    import Error from '@/components/common/Error/Error.vue';
 
     export default defineComponent({
         name: 'Login',
+        components: {Error},
         props: {},
         data() {
             return {

@@ -44,13 +44,7 @@
                     Add Dish
                 </button>
             </div>
-            <ul v-if="errors.length" class="flex flex-col items-center justify-center mt-1 text-red-500 text-sm">
-                    <li 
-                        v-for="error in errors" 
-                        :key="error">
-                        {{ error }}
-                    </li>
-            </ul>
+            <Error :errors="errors"/>
         </form>
     </div>
 </template>
@@ -61,10 +55,12 @@
     import { mapActions, mapGetters } from 'vuex';
     import Select from '@/components/Select/Select.vue';
     import { ICategory } from '@/models/ICategory';
+    import { DataError } from '@/types/types';
+    import Error from '@/components/common/Error/Error.vue';
 
     export default defineComponent({
         name: 'DashboardAddDish',
-        components: { Header, Select },
+        components: { Header, Select, Error },
         data() {
             return {
                 title: '',
@@ -91,8 +87,11 @@
                 this.errors = [];
 
                 try {
-                    if (!this.title || !this.description || !this.price) {
-                        this.errors.push('Invalid dish data');
+                    if (!this.price) {
+                        this.errors.push('Enter the price');
+                        return;
+                    } else if (this.category === 'Select Category') {
+                        this.errors.push('Choose a category for the dish');
                         return;
                     }
 
@@ -102,7 +101,12 @@
                         this.$router.push({name: 'dashboardDishes'});
                     }
                 } catch (error: any) {
-                    this.errors.push(error?.response?.data?.message);
+                    const dataErrors: DataError[] | undefined = error?.response?.data;
+                    if (dataErrors && dataErrors.length) {
+                        dataErrors.forEach((err: DataError) => {
+                            this.errors.push(err.msg);
+                        })
+                    }
                 }
             },
 

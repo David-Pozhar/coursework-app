@@ -26,6 +26,7 @@
                     Save
                 </button>
             </div>
+            <Error :errors="errors"/>
         </form>
     </div>
 </template>
@@ -34,10 +35,12 @@
     import Header from '@/components/Home/Header/Header.vue';
     import { defineComponent } from "vue";
     import { mapActions} from 'vuex';
+    import { DataError } from '@/types/types';
+    import Error from '@/components/common/Error/Error.vue';
 
     export default defineComponent({
         name: 'DashboardUpdateCategory',
-        components: { Header },
+        components: { Header, Error },
         props: {
             id: {
                 type: String
@@ -47,6 +50,7 @@
             return {
                 title: '',
                 description: '',
+                errors: [] as String[]
             }
         },
         computed: {},
@@ -62,8 +66,11 @@
                     if (res.data) {
                         this.$router.push({name: 'dashboardCategories'});
                     }
-                } catch(e) {
-                    console.log('oops');
+                } catch(error: any) {
+                    const dataError: DataError[] | undefined = error?.response?.data;
+                    if (dataError && dataError.length) {
+                        this.errors.push(dataError[0].msg);
+                    }
                 }
             }
         },

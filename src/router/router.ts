@@ -84,7 +84,8 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/myOrders',
         name: 'myOrders',
-        component: MyOrders
+        component: MyOrders,
+        beforeEnter: authGuard
     },
     {
         path: '/dashboard',

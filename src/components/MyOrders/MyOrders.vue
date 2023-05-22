@@ -42,6 +42,7 @@
     import { defineComponent } from 'vue';
     import { mapActions } from 'vuex';
     import Header from '../Home/Header/Header.vue';
+    import { formatDate } from '../common/FormatDate/formatDate';
 
     export default defineComponent({
         name: 'MyOrders',
@@ -63,17 +64,7 @@
                 'GET_USER_BY_TOKEN'
             ]),
             formatCreatedAt(createdAt: string): string {
-                const date = new Date(createdAt);
-                const formattedDate = date.toLocaleString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    second: 'numeric'
-                });
-
-                return formattedDate;
+                return formatDate(createdAt);
             }
         },
         async mounted() {

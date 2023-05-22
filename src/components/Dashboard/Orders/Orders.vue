@@ -14,7 +14,7 @@
                 <input type="text"
                         id="search"
                         v-model="search"
-                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        class="h-6 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         placeholder="Search by Full Name">
             </div>
         </div>
@@ -70,10 +70,10 @@
               <div v-else class="text-sm text-gray-900">Unpaid</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ order.createdAt }}</div>
+              <div class="text-sm text-gray-900">{{ formatDate(order.createdAt) }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ order.updatedAt }}</div>
+              <div class="text-sm text-gray-900">{{ formatDate(order.updatedAt) }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
                 <button class="h-10 px-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100"
@@ -108,6 +108,7 @@
     import Header from '../../Home/Header/Header.vue';
     import OrderDetailsModal from "./Modals/OrderDetailsModal.vue";
     import StatusConfirmationModal from "./Modals/StatusConfirmationModal.vue";
+    import { formatDate } from '../../common/FormatDate/formatDate';
 
     export default defineComponent ({
         name: 'DashboardOrders',
@@ -169,6 +170,9 @@
             },
             cancelConfirmation() {
                 this.showConfirmationModal = false;
+            },
+            formatDate(date: string) {
+              return formatDate(date);
             }
         },
         async mounted() {

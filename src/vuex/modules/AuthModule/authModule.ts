@@ -90,12 +90,13 @@ export const authModule = {
             delete DefaultAPIInstance.defaults.headers['authorization']
         },
 
-        onRegister({commit} : {commit: Commit}, {fullName, email, password}: {fullName: string, email: string, password: string}) {
-            RegisterAPI.register(fullName, email, password)
-            .then(res => {
-                
-                return res
-            })
+        async onRegister({commit} : {commit: Commit}, {fullName, email, password}: {fullName: string, email: string, password: string}) {
+            const res = await RegisterAPI.register(fullName, email, password, false);
+            
+            if (res && res.status === 200 && res.data) {
+                return res.data;
+            }
+            return res; 
         },
 
         async GET_USER_BY_TOKEN() {

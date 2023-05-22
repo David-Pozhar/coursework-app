@@ -44,13 +44,7 @@
                     Save
                 </button>
             </div>
-            <ul v-if="errors.length" class="flex flex-col items-center justify-center mt-4 text-red-500 text-sm">
-                    <li 
-                        v-for="error in errors" 
-                        :key="error">
-                        {{ error }}
-                    </li>
-            </ul>
+            <Error :errors="errors"/>
         </form>
     </div>
 </template>
@@ -61,15 +55,12 @@
     import { mapActions, mapGetters} from 'vuex';
     import Select from '@/components/Select/Select.vue';
     import { ICategory } from '@/models/ICategory';
-
-    type DataError = {
-        type: string;
-        msg: string;
-    }
+    import { DataError } from '@/types/types';
+    import Error from '@/components/common/Error/Error.vue';
 
     export default defineComponent({
         name: 'DashboardUpdateDish',
-        components: { Header, Select },
+        components: { Header, Select, Error },
         props: {
             id: {
                 type: String
@@ -101,6 +92,11 @@
                 this.errors = [];
 
                 try {
+                    if (!this.price) {
+                        this.errors.push('Enter the price');
+                        return;
+                    }
+
                     const data = {id: this.id, title: this.title, description: this.description, price: this.price, categoryId: this.getSelectedCategoryId()};
 
                     if (data.categoryId === '0') {

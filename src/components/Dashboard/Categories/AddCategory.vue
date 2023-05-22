@@ -26,41 +26,48 @@
                     Add Category
                 </button>
             </div>
+            <Error :errors="errors"/>
         </form>
     </div>
 </template>
 
 <script lang="ts">
-import Header from '@/components/Home/Header/Header.vue';
-import { defineComponent } from "vue";
-import { mapActions } from 'vuex';
+    import Header from '@/components/Home/Header/Header.vue';
+    import { defineComponent } from "vue";
+    import { mapActions } from 'vuex';
+    import { DataError } from '@/types/types';
+    import Error from '@/components/common/Error/Error.vue';
 
-export default defineComponent({
-    name: 'DashboardAddCategory',
-    components: { Header },
-    data() {
-        return {
-            title: '',
-            description: ''
-        }
-    },
-    methods: {
-        ...mapActions('category',[
-            'CREATE_CATEGORY',
-        ]),
-        async onSubmit() {
-            try {
-                const data = {title: this.title, description: this.description};
-                const res = await this.CREATE_CATEGORY(data);
-                if (res.data) {
-                    this.$router.push({name: 'dashboardCategories'});
+    export default defineComponent({
+        name: 'DashboardAddCategory',
+        components: { Header, Error },
+        data() {
+            return {
+                title: '',
+                description: '',
+                errors: [] as String[]
+            }
+        },
+        methods: {
+            ...mapActions('category',[
+                'CREATE_CATEGORY',
+            ]),
+            async onSubmit() {
+                try {
+                    const data = {title: this.title, description: this.description};
+                    const res = await this.CREATE_CATEGORY(data);
+                    if (res.data) {
+                        this.$router.push({name: 'dashboardCategories'});
+                    }
+                } catch(error: any) {
+                    const dataError: DataError[] | undefined = error?.response?.data;
+                    if (dataError && dataError.length) {
+                        this.errors.push(dataError[0].msg);
+                    }
                 }
-            } catch(e) {
-                console.log('oops');
             }
         }
-    }
-})
+    })
 </script>
 
 <style></style>

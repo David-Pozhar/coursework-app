@@ -14,7 +14,7 @@
                 <input type="text"
                         id="search"
                         v-model="search"
-                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        class="h-6 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         placeholder="Search by Title">
             </div>
             <router-link to="/dashboard/addDish">
@@ -123,7 +123,7 @@
                 if (res.data) {
                     this.$router.push({name: 'dashboardDishes'});
                 }
-            }
+            },
         },
         mounted(): void {
             this.GET_PRODUCTS_FROM_API();

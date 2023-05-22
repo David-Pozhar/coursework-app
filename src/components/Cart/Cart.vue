@@ -8,7 +8,7 @@
             </div>
         </router-link>
 
-        <h1 class="text-3xl font-bold mb-6">Cart</h1>
+        <h1 class="flex items-center justify-center text-3xl font-bold mb-6">Cart</h1>
 
         <CartItem
             v-for="(item, index) in CART"

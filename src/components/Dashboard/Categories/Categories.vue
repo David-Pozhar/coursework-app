@@ -14,7 +14,7 @@
           <input type="text"
                 id="search"
                 v-model="search"
-                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                class="h-6 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                 placeholder="Search by Title">
         </div>
         <router-link to="/dashboard/addCategory">
@@ -61,10 +61,10 @@
               <div class="text-sm text-gray-900">{{ category.description }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ category.createdAt }}</div>
+              <div class="text-sm text-gray-900">{{ formatDate(category.createdAt) }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ category.updatedAt }}</div>
+              <div class="text-sm text-gray-900">{{ formatDate(category.updatedAt) }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
                 <router-link :to="{name: 'dashboardUpdateCategory', params:{id: category._id}}">
@@ -87,10 +87,10 @@
 
 <script lang="ts">
     import { ICategory } from "@/models/ICategory";
-import { IDish } from "@/models/IDish";
     import { defineComponent } from "vue";
     import { mapActions, mapGetters } from "vuex";
     import Header from '../../Home/Header/Header.vue';
+    import { formatDate } from '../../common/FormatDate/formatDate';
 
     export default defineComponent ({
         name: 'DashboardCategories',
@@ -124,6 +124,9 @@ import { IDish } from "@/models/IDish";
                 if (res.data) {
                     this.$router.push({name: 'dashboardCategories'});
                 }
+            },
+            formatDate(date: string) {
+              return formatDate(date);
             }
         },
         mounted(): void {
