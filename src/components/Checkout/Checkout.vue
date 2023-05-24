@@ -43,7 +43,7 @@
             </div>
         </div>
       </div>
-  
+      
       <!-- Order Confirmation Modal -->
         <div v-if="showConfirmationModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div class="bg-white p-8 rounded-lg shadow-lg">
@@ -81,7 +81,7 @@
         data() {
             return {
                 orderItems: [] as OrderCreation[],
-                showConfirmationModal: false
+                showConfirmationModal: false,
             }
         },
         computed: {

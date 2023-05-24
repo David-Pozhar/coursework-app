@@ -1,4 +1,6 @@
 <template>
+    <Header/>
+
     <div class="about_container bg-white">
             <div id="about" class="p-24 grid grid-cols-2 pb-16">
                 <div>
@@ -16,12 +18,18 @@
                 </div>
             </div>
         </div>
+
+    <Footer/>
 </template>
 
 <script lang="ts">
     import { defineComponent } from 'vue';
+    import Header from '../Header/Header.vue';
+    import Footer from '../Footer/Footer.vue';
+
     export default defineComponent({
-        name: 'About'
+        name: 'About',
+        components: {Header, Footer},
     });
 </script>
 

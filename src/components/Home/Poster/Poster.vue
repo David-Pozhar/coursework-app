@@ -11,12 +11,12 @@
                 </p>
 
                 <div class="home_btn">
-                    <button :disabled="true" class="px-4 py-3 bg-gradient-to-br from-orange-400 to-orange-500 rounded-lg hover:shadow-lg transition-all ease-in-out duration-100 text-white font-bold">
+                    <!-- <button :disabled="true" class="px-4 py-3 bg-gradient-to-br from-orange-400 to-orange-500 rounded-lg hover:shadow-lg transition-all ease-in-out duration-100 text-white font-bold">
                         Order Now
-                    </button>
-                    <router-link to="/menu" class="text-yellow-400 hover:text-yellow-500 font-bold text-decoration-line px-3">
+                    </button> -->
+                    <!-- <router-link to="/menu" class="text-yellow-400 hover:text-yellow-500 font-bold text-decoration-line px-3">
                         See Menu
-                    </router-link>
+                    </router-link> -->
                 </div>
             </div>
 
@@ -30,8 +30,8 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     export default defineComponent({
-        name: 'Poster'
+        name: 'Poster',
     });
 </script>
 
-<style></style>
+<style></style> 

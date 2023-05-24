@@ -1,7 +1,5 @@
 <template>
-    <Header/>
-
-    <div class="text-black">
+    <div class="text-black mb-24 mt-20">
       <h1 class="flex items-center justify-center text-4xl font-bold mt-8">Menu</h1>
       <Select class="mt-4 ml-2"
         :selected="selected"
@@ -82,9 +80,9 @@
                 this.selected = category.title;
             }
         },
-        mounted(): void {
-            this.GET_PRODUCTS_FROM_API();
-            this.GET_CATEGORIES_FROM_API(true);
+        async mounted() {
+            await this.GET_PRODUCTS_FROM_API();
+            await this.GET_CATEGORIES_FROM_API(true);
         }
     });
 </script>

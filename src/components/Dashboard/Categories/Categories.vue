@@ -58,7 +58,7 @@
               <div class="text-sm text-gray-900">{{ category.title }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ category.description }}</div>
+              <div class="text-sm text-gray-900">{{ truncatedText(category.description) }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ formatDate(category.createdAt) }}</div>
@@ -91,6 +91,7 @@
     import { mapActions, mapGetters } from "vuex";
     import Header from '../../Home/Header/Header.vue';
     import { formatDate } from '../../common/FormatDate/formatDate';
+    import {truncateText} from '../../common/TruncateText/truncateText';
 
     export default defineComponent ({
         name: 'DashboardCategories',
@@ -127,6 +128,9 @@
             },
             formatDate(date: string) {
               return formatDate(date);
+            },
+            truncatedText(text: string): string {
+              return truncateText(text);
             }
         },
         mounted(): void {

@@ -2,8 +2,10 @@ import Vue from 'vue'
 import { store } from '@/vuex/store'
 import { RouteRecordRaw, createRouter, createWebHistory, RouteLocationNormalized, NavigationGuardNext  } from 'vue-router'
 import Menu from '../components/Menu/Menu.vue'
+import DishInfo from '../components/Menu/DishInfo/DishInfo.vue'
 import Cart from '../components/Cart/Cart.vue'
 import Checkout from '../components/Checkout/Checkout.vue'
+import About from '../components/Home/About/About.vue'
 import Login from '../components/Login/Login.vue'
 import Register from '../components/Register/Register.vue'
 import MyOrders from '../components/MyOrders/MyOrders.vue'
@@ -54,10 +56,21 @@ const routes: Array<RouteRecordRaw> = [
         component: Home,
     },
     {
-        path: '/menu',
-        name: 'menu',
-        component: Menu,
+        path: '/about',
+        name: 'about',
+        component: About,
     },
+    {
+        path: '/dishes/:id',
+        name: 'dishInfo',
+        component: DishInfo,
+        props: true
+    },
+    // {
+    //     path: '/menu',
+    //     name: 'menu',
+    //     component: Menu,
+    // },
     {
         path: '/cart',
         name: 'cart',

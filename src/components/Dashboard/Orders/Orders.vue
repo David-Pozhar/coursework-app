@@ -23,19 +23,19 @@
           <tr>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                №
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Order id
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Customer's Full Name
             </th>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Order details
-            </th>
-            <th scope="col"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Total Price
-            </th>
-            <th scope="col"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Status
             </th>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -47,33 +47,47 @@
             </th>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Status
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Order details
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Change status
             </th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="order in filteredOrders" :key="order._id">
+          <tr v-for="(order,index) in filteredOrders" :key="order._id">
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{ index + 1 }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{ order._id }}</div>
+            </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ order.user.fullName }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-                <button class="h-10 px-5 text-sky-700 transition-colors duration-150 border border-sky-500 rounded-lg focus:shadow-outline hover:bg-sky-500 hover:text-sky-100"
-                        @click="showDetails(order._id)"
-                    >View details
-                </button>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ order.totalPrice }}</div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div v-if="order.isPaid" class="text-sm text-gray-900">Paid</div>
-              <div v-else class="text-sm text-gray-900">Unpaid</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ formatDate(order.createdAt) }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ formatDate(order.updatedAt) }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div v-if="order.isPaid" class="text-sm text-gray-900">Paid</div>
+              <div v-else class="text-sm text-gray-900">Unpaid</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <button class="h-10 px-5 text-sky-700 transition-colors duration-150 border border-sky-500 rounded-lg focus:shadow-outline hover:bg-sky-500 hover:text-sky-100"
+                        @click="showDetails(order._id)"
+                    >View details
+                </button>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
                 <button class="h-10 px-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100"

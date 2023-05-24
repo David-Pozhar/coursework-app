@@ -11,7 +11,7 @@
                 <div class="menu_wrapper flex items-center justify-between space-x-10">
                     <router-link to='/' class='text-xl'>Home</router-link>
                     <router-link v-if="checkUserRole === 'admin'" to='/dashboard' class='text-xl'>Dashboard</router-link>
-                    <router-link to='#about' class='text-xl'>About</router-link>
+                    <router-link to='/about' class='text-xl'>About</router-link>
                 </div>
 
                 <div

@@ -1,0 +1,1 @@
+export const IMAGE_HOST_NAME = 'http://localhost:4444';

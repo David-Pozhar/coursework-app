@@ -58,7 +58,7 @@
               <div class="text-sm text-gray-900">{{ dish.title }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ dish.description }}</div>
+              <div class="text-sm text-gray-900">{{ truncatedText(dish.description) }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ dish.price }}</div>
@@ -90,6 +90,7 @@
     import { defineComponent } from "vue";
     import { mapActions, mapGetters } from "vuex";
     import Header from '../../Home/Header/Header.vue';
+    import {truncateText} from '../../common/TruncateText/truncateText'
 
     export default defineComponent ({
         name: 'DashboardCategories',
@@ -123,6 +124,9 @@
                 if (res.data) {
                     this.$router.push({name: 'dashboardDishes'});
                 }
+            },
+            truncatedText(text: string): string {
+              return truncateText(text);
             },
         },
         mounted(): void {
