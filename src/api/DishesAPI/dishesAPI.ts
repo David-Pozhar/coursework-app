@@ -5,8 +5,8 @@ import { IConfirm } from '@/models/IConfirm';
 import FormData from 'form-data';
 
 export const DishesAPI = {
-    dishes(): Promise<AxiosResponse<IDish[]>> {
-        const url = '/dishes';
+    dishes(currentPage: number, pageSize: number): Promise<AxiosResponse<IDish[]>> {
+        const url = `/dishes?page=${currentPage}&pageSize=${pageSize}`;
         return LoginAPIInstance.get(url);
     },
     createDish(title: string, description: string, imageUrl: string, category: string, price: number): Promise<AxiosResponse<IDish>> {
@@ -30,7 +30,6 @@ export const DishesAPI = {
     uploadImage(inputName: string, file: File): Promise<AxiosResponse<String>> {
         const formData = new FormData();
         formData.append(inputName, file);
-        //const data = {inputName: file};
         const url = '/upload-dish';
         return UploadAPIInstance.post(url, formData);
     }

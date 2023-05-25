@@ -49,8 +49,8 @@ export const dishModule = {
         }
     },
     actions : {
-        async GET_PRODUCTS_FROM_API({commit} : {commit: Commit}) {
-            const res = await DishesAPI.dishes();
+        async GET_PRODUCTS_FROM_API({commit}: {commit: Commit}, {currentPage, pageSize}: {currentPage: number, pageSize: number}) {
+            const res = await DishesAPI.dishes(currentPage, pageSize);
             
             if (res && res.status === 200 && res.data) {
                 commit('SET_PRODUCTS_TO_STATE', res.data);
@@ -59,7 +59,7 @@ export const dishModule = {
             return res.data;
         },
 
-        async CREATE_DISH({commit}: {commit: Commit}, {title, description, imageUrl, categoryId, price} : {title: string, description: string, imageUrl: string, categoryId: string, price: number}) {
+        async CREATE_DISH({commit}: {commit: Commit}, {title, description, imageUrl, categoryId, price}: {title: string, description: string, imageUrl: string, categoryId: string, price: number}) {
             const res = await DishesAPI.createDish(title, description, imageUrl, categoryId, price);
             if (res && res.status === 200 && res.data) {
                 commit('SET_NEW_DISH', res.data);
@@ -68,7 +68,7 @@ export const dishModule = {
             return res;
         },
 
-        async UPDATE_DISH({commit}: {commit : Commit}, {id, title, description, imageUrl, price, categoryId} : {id: string, title: string, description: string, imageUrl: string, price: number, categoryId: string}) {
+        async UPDATE_DISH({commit}: {commit: Commit}, {id, title, description, imageUrl, price, categoryId}: {id: string, title: string, description: string, imageUrl: string, price: number, categoryId: string}) {
             const res = await DishesAPI.updateDish(id, title, description, imageUrl, price, categoryId);
             if (res && res.status === 200 && res.data) {
                 commit('EDIT_DISH', {id, title, description, imageUrl, price, categoryId});
@@ -87,7 +87,7 @@ export const dishModule = {
             return res;
         },
 
-        async DELETE_DISH({commit}: {commit : Commit}, id: string) {
+        async DELETE_DISH({commit}: {commit: Commit}, id: string) {
             const res = await DishesAPI.deleteDish(id);
             if (res && res.status === 200 && res.data) {
                 commit('REMOVE_DISH', id);
@@ -96,7 +96,7 @@ export const dishModule = {
             return res;
         },
 
-        async UPLOAD_IMAGE({commit}: {commit : Commit}, imageData: ImageUpload ) {
+        async UPLOAD_IMAGE({commit}: {commit: Commit}, imageData: ImageUpload ) {
             const res = await DishesAPI.uploadImage(imageData.name, imageData.image);
             if (res && res.status === 200 && res.data) {
                 return res.data;

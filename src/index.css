@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Pagination */
+.btn {
+    height: 40px;
+    width: 40px;
+    border: none;
+    margin-inline: 5px;
+    cursor: pointer;
+}
+.back-btn {
+    background-color: grey;
+}
+.next-btn {
+    background-color: grey;
+}
+.btn-active {
+    background-color: black;
+    color: white;
+}
