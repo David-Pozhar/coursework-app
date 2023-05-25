@@ -30,18 +30,17 @@ export const ordersModule = {
         }
     },
     actions : {
-        async GET_ORDERS_FROM_API({commit} : {commit: Commit}) {
-            const res = await OrdersAPI.orders();
+        async GET_ORDERS_FROM_API({commit} : {commit: Commit}, {currentPage, pageSize}: {currentPage: number, pageSize: number}) {
+            const res = await OrdersAPI.orders(currentPage, pageSize);
             if (res && res.status === 200 && res.data) {
                 commit('SET_ORDERS_TO_STATE', res.data);
             }
             
-            return res;
+            return res.data;
         },
-        async GET_USER_ORDERS(_ : ActionContext<State, State>, {userId} : {userId: string}) {
-            const res = await OrdersAPI.orders(userId);
+        async GET_USER_ORDERS(_ : ActionContext<State, State>, {currentPage, pageSize, userId} : {currentPage: number, pageSize: number, userId: string}) {
+            const res = await OrdersAPI.orders(currentPage, pageSize, userId);
             if (res && res.status === 200 && res.data) {
-                console.log(res.data);
                 return res.data;
             }
             return res;

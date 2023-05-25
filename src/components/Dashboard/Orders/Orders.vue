@@ -99,6 +99,8 @@
         </tbody>
       </table>
 
+      <Paginator :paginatorName="'orders'"/>
+
         <StatusConfirmationModal
             v-if="showConfirmationModal"
             @confirm="confirmChange"
@@ -123,17 +125,18 @@
     import OrderDetailsModal from "./Modals/OrderDetailsModal.vue";
     import StatusConfirmationModal from "./Modals/StatusConfirmationModal.vue";
     import { formatDate } from '../../common/FormatDate/formatDate';
+    import Paginator from "@/components/common/Paginator/Paginator.vue";
 
     export default defineComponent ({
         name: 'DashboardOrders',
-        components: {Header, OrderDetailsModal, StatusConfirmationModal},
+        components: {Header, OrderDetailsModal, StatusConfirmationModal, Paginator},
         data() {
             return {
                 search: '',
                 showConfirmationModal: false,
                 showDetailsModal: false,
                 currentOrderId: '',
-                order_data: {} as IOrder
+                order_data: {} as IOrder,
             }
         },
         computed: {
@@ -189,9 +192,6 @@
               return formatDate(date);
             }
         },
-        async mounted() {
-            await this.GET_ORDERS_FROM_API();
-        }
     })
 </script>
 

@@ -20,13 +20,13 @@ export const usersModule = {
         }
     },
     actions : {
-        async GET_USERS_FROM_API({commit} : {commit: Commit}) {
-            const res = await UsersAPI.users();
+        async GET_USERS_FROM_API({commit} : {commit: Commit}, {currentPage, pageSize}: {currentPage: number, pageSize: number}) {
+            const res = await UsersAPI.users(currentPage, pageSize);
             if (res && res.status === 200 && res.data) {
                 commit('SET_USERS_TO_STATE', res.data);
             }
             
-            return res;
+            return res.data;
         }
     },
     getters: {

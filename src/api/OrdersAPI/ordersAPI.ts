@@ -4,8 +4,8 @@ import { IOrder, OrderCreation} from "@/models/IOrder";
 import { IConfirm } from "@/models/IConfirm";
 
 export const OrdersAPI = {
-    orders(userId?: string): Promise<AxiosResponse<IOrder[]>> {
-        const url = '/orders';
+    orders(currentPage: number, pageSize: number, userId?: string): Promise<AxiosResponse<IOrder[]>> {
+        const url = `/orders?page=${currentPage}&pageSize=${pageSize}`;
         const queryParams = userId ? {params: {user: userId}} : undefined;
         return DefaultAPIInstance.get(url, queryParams);
     },

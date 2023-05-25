@@ -82,6 +82,7 @@
           </tr>
         </tbody>
       </table>
+      <Paginator :paginatorName="'categories'"/>
     </div>
   </template>
 
@@ -92,10 +93,11 @@
     import Header from '../../Home/Header/Header.vue';
     import { formatDate } from '../../common/FormatDate/formatDate';
     import {truncateText} from '../../common/TruncateText/truncateText';
+    import Paginator from "@/components/common/Paginator/Paginator.vue";
 
     export default defineComponent ({
         name: 'DashboardCategories',
-        components: {Header},
+        components: {Header, Paginator},
         data() {
             return {
                 search: '',
@@ -112,7 +114,7 @@
         },
         methods: {
             ...mapActions('category',[
-                'GET_CATEGORIES_FROM_API',
+                'GET_CATEGORIES_FROM_API_WITH_PAGINATION',
                 'DELETE_CATEGORY'
             ]),
             confirmDelete(id: string): void {
@@ -133,9 +135,6 @@
               return truncateText(text);
             }
         },
-        mounted(): void {
-            this.GET_CATEGORIES_FROM_API(false);
-        }
     })
 </script>
 

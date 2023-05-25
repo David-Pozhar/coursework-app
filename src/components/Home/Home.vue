@@ -16,7 +16,6 @@
 
     export default defineComponent({
         name: 'Home',
-        props: {},
         components: {
             Poster, Carousel, Menu, Header, Footer
         },

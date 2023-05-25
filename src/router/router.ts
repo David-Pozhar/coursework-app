@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import { store } from '@/vuex/store'
 import { RouteRecordRaw, createRouter, createWebHistory, RouteLocationNormalized, NavigationGuardNext  } from 'vue-router'
-import Menu from '../components/Menu/Menu.vue'
 import DishInfo from '../components/Menu/DishInfo/DishInfo.vue'
 import Cart from '../components/Cart/Cart.vue'
 import Checkout from '../components/Checkout/Checkout.vue'
@@ -66,16 +65,10 @@ const routes: Array<RouteRecordRaw> = [
         component: DishInfo,
         props: true
     },
-    // {
-    //     path: '/menu',
-    //     name: 'menu',
-    //     component: Menu,
-    // },
     {
         path: '/cart',
         name: 'cart',
         component: Cart,
-        // beforeEnter: authGuard,
         props: true
     },
     {

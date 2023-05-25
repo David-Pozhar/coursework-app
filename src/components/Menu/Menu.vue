@@ -14,6 +14,7 @@
           @addToCart="addToCart"
         />
       </div>
+      <Paginator :paginatorName="'dishes'"/>
     </div>
 </template>
 
@@ -25,17 +26,17 @@
     import Select from '../Select/Select.vue'
     import {ICategory} from '../../models/ICategory'
     import Header from '../Home/Header/Header.vue';
+    import Paginator from '../common/Paginator/Paginator.vue';
 
     export default defineComponent({
         name: 'Menu',
         components: {
-            MenuItem, Select, Header
+            MenuItem, Select, Header, Paginator
         },
-        props: {},
         data() {
             return {
                 selected: 'Select Category',
-                sortedProducts: [] as IDish[]
+                sortedProducts: [] as IDish[],
             }
         },
         computed: {
@@ -64,7 +65,7 @@
                 'GET_CATEGORIES_FROM_API',
             ]),
             ...mapActions('dishes',[
-                'GET_PRODUCTS_FROM_API',
+                'GET_PRODUCTS_FROM_API_WITH_PAGINATION',
             ]),
             addToCart(data: IDish): void {
                 this.ADD_TO_CART(data)
@@ -78,10 +79,9 @@
                     }
                 });
                 this.selected = category.title;
-            }
+            },
         },
         async mounted() {
-            await this.GET_PRODUCTS_FROM_API();
             await this.GET_CATEGORIES_FROM_API(true);
         }
     });

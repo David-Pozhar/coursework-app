@@ -5,7 +5,7 @@ import { IConfirm } from '@/models/IConfirm';
 import FormData from 'form-data';
 
 export const DishesAPI = {
-    dishes(currentPage: number, pageSize: number): Promise<AxiosResponse<IDish[]>> {
+    dishes(currentPage?: number, pageSize?: number): Promise<AxiosResponse<IDish[]>> {
         const url = `/dishes?page=${currentPage}&pageSize=${pageSize}`;
         return LoginAPIInstance.get(url);
     },

@@ -82,17 +82,7 @@
           </tr>
         </tbody>
       </table>
-      <vue-awesome-paginate
-        :total-items="total"
-        :items-per-page="pageSize"
-        :max-pages-shown="maxPagesShown"
-        v-model="currentPage"
-        :on-click="onClickHandler"
-        paginate-buttons-class="btn"
-        active-page-class="btn-active"
-        back-button-class="back-btn"
-        next-button-class="next-btn"
-      />
+      <Paginator :paginatorName="'dishes'"/>
     </div>
   </template>
 
@@ -102,17 +92,14 @@
     import { mapActions, mapGetters } from "vuex";
     import Header from '../../Home/Header/Header.vue';
     import {truncateText} from '../../common/TruncateText/truncateText';
+    import Paginator from "@/components/common/Paginator/Paginator.vue";
 
     export default defineComponent ({
         name: 'DashboardCategories',
-        components: { Header },
+        components: { Header, Paginator },
         data() {
             return {
                 search: '',
-                currentPage: 1,
-                pageSize: 10,
-                total: 0,
-                maxPagesShown: 10
             }
         },
         computed: {
@@ -126,7 +113,7 @@
         },
         methods: {
             ...mapActions('dishes',[
-                'GET_PRODUCTS_FROM_API',
+                'GET_PRODUCTS_FROM_API_WITH_PAGINATION',
                 'DELETE_DISH',
             ]),
             confirmDelete(id: string): void {
@@ -143,17 +130,6 @@
             truncatedText(text: string): string {
               return truncateText(text);
             },
-            async onClickHandler(page: number) {
-                this.currentPage = page;
-                this.$router.push({ query: { page: this.currentPage } });
-                const response = await this.GET_PRODUCTS_FROM_API({ currentPage: this.currentPage, pageSize: this.pageSize });
-                this.total = response?.totalCount || 0;
-            }
-        },
-        async mounted() {
-            this.currentPage = parseInt(this.$route.query.page as string, 10) || 1;
-            const response = await this.GET_PRODUCTS_FROM_API({ currentPage: this.currentPage, pageSize: this.pageSize });
-            this.total = response?.totalCount || 0;
         }
     })
 </script>

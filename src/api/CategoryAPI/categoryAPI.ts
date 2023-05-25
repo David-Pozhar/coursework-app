@@ -5,8 +5,8 @@ import { IConfirm } from "@/models/IConfirm";
 
 
 export const CategoryAPI = {
-    categories(): Promise<AxiosResponse<ICategory[]>> {
-        const url = '/categories';
+    categories(currentPage?: number, pageSize?: number): Promise<AxiosResponse<ICategory[]>> {
+        const url = `/categories?page=${currentPage}&pageSize=${pageSize}`;
         return LoginAPIInstance.get(url);
     },
     createCategory(title: string, description: string): Promise<AxiosResponse<ICategory>> {

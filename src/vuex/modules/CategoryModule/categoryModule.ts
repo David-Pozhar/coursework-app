@@ -54,13 +54,22 @@ export const categoryModule = {
         }
     },
     actions: {
-        async GET_CATEGORIES_FROM_API({commit} : {commit: Commit}, extraCategory : boolean) {
+        async GET_CATEGORIES_FROM_API_WITH_PAGINATION({commit} : {commit: Commit}, {currentPage, pageSize, extraCategory} : {currentPage: number, pageSize: number, extraCategory : boolean}) {
+            const res = await CategoryAPI.categories(currentPage, pageSize);
+            if (res && res.status === 200 && res.data) {
+                commit('SET_CATEGORIES_TO_STATE', {res, extraCategory});
+            }
+
+            return res.data;
+        },
+
+        async GET_CATEGORIES_FROM_API({commit} : {commit: Commit}, extraCategory: boolean) {
             const res = await CategoryAPI.categories();
             if (res && res.status === 200 && res.data) {
                 commit('SET_CATEGORIES_TO_STATE', {res, extraCategory});
             }
 
-            return res;
+            return res.data;
         },
 
         async CREATE_CATEGORY({commit}: {commit: Commit}, {title, description} : {title: string, description: string}) {

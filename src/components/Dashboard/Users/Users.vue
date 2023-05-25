@@ -56,6 +56,7 @@
           </tr>
         </tbody>
       </table>
+      <Paginator :paginatorName="'users'"/>
     </div>
   </template>
 
@@ -65,10 +66,11 @@
     import { mapActions, mapGetters } from "vuex";
     import Header from '../../Home/Header/Header.vue';
     import { formatDate } from '../../common/FormatDate/formatDate';
+    import Paginator from "@/components/common/Paginator/Paginator.vue";
 
     export default defineComponent ({
         name: 'DashboardUsers',
-        components: {Header},
+        components: { Header, Paginator },
         data() {
             return {
                 search: '',
@@ -84,15 +86,15 @@
             },
         },
         methods: {
-            ...mapActions('users',[
-                'GET_USERS_FROM_API'
+          ...mapActions('users',[
+                'GET_USERS_FROM_API',
             ]),
             formatDate(date: string) {
               return formatDate(date);
             }
         },
-        mounted(): void {
-            this.GET_USERS_FROM_API();
+        mounted() {
+          this.GET_USERS_FROM_API();
         }
     })
 </script>
