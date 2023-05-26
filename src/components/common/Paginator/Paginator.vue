@@ -16,6 +16,7 @@
     import { defineComponent } from 'vue';
     import { mapActions } from 'vuex';
     import { DEFAULT_PAGE_SIZE, DEFAULT_MAXPAGE_SHOWN } from '@/config';
+    import { IUser } from '@/models/IUser';
 
     export default defineComponent({
         name: 'Paginator',
@@ -24,10 +25,6 @@
                 type: String,
                 default: '',
                 required: true
-            },
-            userId: {
-                type: String,
-                default: ''
             }
         },
         data() {
@@ -35,15 +32,19 @@
                 currentPage: 1,
                 pageSize: DEFAULT_PAGE_SIZE,
                 total: 0,
-                maxPagesShown: DEFAULT_MAXPAGE_SHOWN
+                maxPagesShown: DEFAULT_MAXPAGE_SHOWN,
+                userId: ''
             }
         },
         methods: {
             ...mapActions('dishes',[
-                'GET_PRODUCTS_FROM_API_WITH_PAGINATION',
+                'GET_PRODUCTS_FROM_API',
             ]),
             ...mapActions('category',[
                 'GET_CATEGORIES_FROM_API_WITH_PAGINATION',
+            ]),
+            ...mapActions('auth',[
+                'GET_USER_BY_TOKEN'
             ]),
             ...mapActions('orders',[
                 'GET_ORDERS_FROM_API',
@@ -58,7 +59,7 @@
                 let response = [];
                 switch(paginatorName) {
                     case 'dishes':
-                        response = await this.GET_PRODUCTS_FROM_API_WITH_PAGINATION({ currentPage: this.currentPage, pageSize: this.pageSize });
+                        response = await this.GET_PRODUCTS_FROM_API({ currentPage: this.currentPage, pageSize: this.pageSize });
                         break;
                     case 'categories':
                         response = await this.GET_CATEGORIES_FROM_API_WITH_PAGINATION({ currentPage: this.currentPage, pageSize: this.pageSize });
@@ -84,6 +85,14 @@
         },
         async mounted() {
             this.currentPage = parseInt(this.$route.query.page as string, 10) || 1;
+
+            if (this.paginatorName === 'myOrders') {
+                const user: IUser | null = await this.GET_USER_BY_TOKEN();
+                if (user) {
+                    this.userId = user._id;
+                }
+            }
+
             this.getServerResponseForPaginator(this.paginatorName);
         }
     })

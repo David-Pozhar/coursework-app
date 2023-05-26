@@ -3,7 +3,7 @@
     <div class="max-w-5xl overflow-hidden mx-auto relative">
         <div class="flex container text-white bg-black transition-all duration-500 ease" :style="{ 'margin-left': '-' + (33.33 * currentSlideIndex) + '%' }">
             <CarouselItem class="p-3 flex-shrink-0 bg-black carousel-item"
-                            v-for="product in products"
+                            v-for="product in carouselProducts"
                             :key="product._id"
                             :product_data="product"
             />
@@ -32,14 +32,11 @@
         components: {CarouselItem},
         data() {
             return {
-                products: [] as IDish[],
+                carouselProducts: [] as IDish[],
                 currentSlideIndex: 0,
+                currentPage: 1,
+                carouselPageSize: 10
             }
-        },
-        computed: {
-            ...mapGetters('dishes',[
-                'PRODUCTS',
-            ]),
         },
         methods: {
             ...mapActions('dishes',[
@@ -51,7 +48,7 @@
                 }
             },
             nextSlide() {
-                if (this.currentSlideIndex >= this.products.length - 3) {
+                if (this.currentSlideIndex >= this.carouselProducts.length - 3) {
                     this.currentSlideIndex = 0;
                 } else {
                     this.currentSlideIndex++;
@@ -59,13 +56,8 @@
             }
         },
         async mounted() {
-            await this.GET_PRODUCTS_FROM_API();
-            this.products = this.PRODUCTS;
-
-            // let vm = this;
-            // setInterval(() => {
-            //     vm.nextSlide()
-            // }, 2000);
+            const res = await this.GET_PRODUCTS_FROM_API({ currentPage: this.currentPage, pageSize: this.carouselPageSize, saveState: false });
+            this.carouselProducts = res.dishes;
         }
     })
 </script>

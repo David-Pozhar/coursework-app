@@ -92,9 +92,6 @@
             formatDate(date: string) {
               return formatDate(date);
             }
-        },
-        mounted() {
-          this.GET_USERS_FROM_API();
         }
     })
 </script>

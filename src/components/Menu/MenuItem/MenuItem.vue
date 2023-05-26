@@ -6,7 +6,7 @@
                     <img v-if="product_data.imageUrl" :src="product_data.imageUrl" alt="img" class="w-40 h-40 rounded-xl object-covers">
                     <img v-else src="../../../assets/img/pancake-home.png" alt="img">
                 </div>
-                <p class="flex items-center justify-center text-lg font-bold text-gray-900">{{ product_data.title }}</p>
+                <p class="flex items-center justify-center text-lg font-bold text-gray-900 mt-1">{{ product_data.title }}</p>
             </router-link>
             <p class="text-gray-600 mt-2">{{ truncatedText(product_data.description) }}</p>
             <p class="text-gray-900 font-semibold mt-2">Price: {{ product_data.price }}</p>

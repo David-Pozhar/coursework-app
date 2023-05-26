@@ -113,7 +113,7 @@
         },
         methods: {
             ...mapActions('dishes',[
-                'GET_PRODUCTS_FROM_API_WITH_PAGINATION',
+                'GET_PRODUCTS_FROM_API',
                 'DELETE_DISH',
             ]),
             confirmDelete(id: string): void {

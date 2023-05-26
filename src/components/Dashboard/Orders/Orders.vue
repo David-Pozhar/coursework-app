@@ -145,13 +145,11 @@
             ]) as {ORDERS: () => IOrder[]},
 
             filteredOrders(): IOrder[] {
-                console.log(this.ORDERS);
                 return this.ORDERS.filter(order => order.user.fullName.toLowerCase().includes(this.search.toLowerCase()));
             },
         },
         methods: {
             ...mapActions('orders',[
-                'GET_ORDERS_FROM_API',
                 'UPDATE_ORDER',
                 'GET_ONE_ORDER'
             ]),
@@ -191,7 +189,7 @@
             formatDate(date: string) {
               return formatDate(date);
             }
-        },
+        }
     })
 </script>
 

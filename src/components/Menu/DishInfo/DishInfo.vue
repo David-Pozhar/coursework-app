@@ -53,7 +53,6 @@
         async mounted() {
             const dish = await this.GET_ONE_DISH(this.id);
             if (dish) {
-                console.log(dish);
                 this.dish = dish;
             }
         }

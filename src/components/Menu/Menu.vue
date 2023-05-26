@@ -65,7 +65,7 @@
                 'GET_CATEGORIES_FROM_API',
             ]),
             ...mapActions('dishes',[
-                'GET_PRODUCTS_FROM_API_WITH_PAGINATION',
+                'GET_PRODUCTS_FROM_API',
             ]),
             addToCart(data: IDish): void {
                 this.ADD_TO_CART(data)

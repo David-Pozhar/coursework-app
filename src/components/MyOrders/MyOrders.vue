@@ -6,8 +6,8 @@
             <div v-if="isFetching" class="flex justify-center items-center">
                 <img src="../../assets/img/preloader.gif" alt="Loading...">
             </div>
-            <div v-else-if="userOrders.length">
-                <div v-for="order in userOrders" :key="order._id" class="mb-8 border-b pb-4">
+            <div v-else-if="ORDERS.length">
+                <div v-for="order in ORDERS" :key="order._id" class="mb-8 border-b pb-4">
                     <div v-for="orderItem in order.orderItems" :key="orderItem._id" class="flex items-center mb-4">
                         <img class="w-16 h-16 object-cover rounded-md mr-4"
                             src="https://assets.noshu.com/uploads/2022/03/Noshu-PancakeMix-LC-Hero-750px.png"
@@ -32,18 +32,15 @@
                 <p class="text-lg text-center">No orders available.</p>
             </div>
         </div>
-        <Paginator 
-            :paginatorName="'myOrders'"
-            :userId="userId"/>
+        <Paginator :paginatorName="'myOrders'" />
     </div>
 </template>
 
 
 <script lang="ts">
     import { IOrder } from '@/models/IOrder';
-    import { IUser } from '@/models/IUser';
     import { defineComponent } from 'vue';
-    import { mapActions } from 'vuex';
+    import { mapGetters } from 'vuex';
     import Header from '../Home/Header/Header.vue';
     import { formatDate } from '../common/FormatDate/formatDate';
     import Paginator from '../common/Paginator/Paginator.vue';
@@ -53,37 +50,27 @@
         components: {Header, Paginator},
         data() {
             return {
-                userOrders: [] as IOrder[],
-                userId: '',
-                isFetching: false,
+                isFetching: true,
             }
         },
         computed: {
-            
-        },
-        methods: {
-            ...mapActions('orders',[
-                'GET_USER_ORDERS'
-            ]),
-            ...mapActions('auth',[
-                'GET_USER_BY_TOKEN'
-            ]),
-            formatCreatedAt(createdAt: string): string {
-                return formatDate(createdAt);
-            },
-        },
-        async mounted() {
-            this.isFetching = true;
-            const user: IUser | null = await this.GET_USER_BY_TOKEN();
-            if (user) {
-                this.userId = user._id;
-                const res = await this.GET_USER_ORDERS(user._id);
-                if (res && res.orders) {
-                    this.isFetching = false;
-                    this.userOrders = res.orders;
-                }
+            ...mapGetters('orders',[
+                'ORDERS'
+            ]) as {ORDERS: () => IOrder[]},
+            watchedProperty(): IOrder[] {
+                return this.ORDERS;
             }
         },
+        methods: {
+            formatCreatedAt(createdAt: string): string {
+                return formatDate(createdAt);
+            }
+        },
+        watch: {
+            watchedProperty() {
+                this.isFetching = false;
+            }
+        }
     })
 </script>
 

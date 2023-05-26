@@ -1,5 +1,5 @@
 import { OrdersAPI } from "@/api/OrdersAPI/ordersAPI";
-import { IOrder, OrderCreation, OrderItem } from "@/models/IOrder";
+import { IOrder, OrderCreation } from "@/models/IOrder";
 import State from "@/vuex/store";
 import { ActionContext, Commit } from "vuex";
 
@@ -19,9 +19,6 @@ export const ordersModule = {
         SET_ORDERS_TO_STATE(state: OrderState, data: OrderState) {
             state.orders = data.orders;
         },
-        SET_NEW_ORDER(state: OrderState, data: IOrder) {
-            //state.orders.push(data);
-        },
         EDIT_ORDER(state: OrderState, {id, isPaid} : {id: string, isPaid: boolean}) {
             const editableOrder = state.orders.find(({_id}) => _id === id);
             if (editableOrder) {
@@ -38,21 +35,16 @@ export const ordersModule = {
             
             return res.data;
         },
-        async GET_USER_ORDERS(_ : ActionContext<State, State>, {currentPage, pageSize, userId} : {currentPage: number, pageSize: number, userId: string}) {
+        async GET_USER_ORDERS({commit} : {commit: Commit}, {currentPage, pageSize, userId} : {currentPage: number, pageSize: number, userId: string}) {
             const res = await OrdersAPI.orders(currentPage, pageSize, userId);
             if (res && res.status === 200 && res.data) {
+                commit('SET_ORDERS_TO_STATE', res.data);
                 return res.data;
             }
             return res;
         },
         async CREATE_ORDER({commit} : {commit: Commit}, {orderItems}: {orderItems: OrderCreation[]}) {
-            const res = await OrdersAPI.createOrder(orderItems);
-
-            if (res && res.status === 200 && res.data) {
-               // commit('SET_NEW_ORDER', res.data);
-            }
-
-            return res;
+            return await OrdersAPI.createOrder(orderItems);
         },
         async UPDATE_ORDER({commit}: {commit : Commit}, {id, isPaid} : {id: string, isPaid: boolean}) {
             const res = await OrdersAPI.updateOrder(id, isPaid);

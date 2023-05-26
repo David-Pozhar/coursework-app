@@ -49,23 +49,13 @@ export const dishModule = {
         }
     },
     actions : {
-        async GET_PRODUCTS_FROM_API_WITH_PAGINATION({commit}: {commit: Commit}, {currentPage, pageSize}: {currentPage: number, pageSize: number}) {
+        async GET_PRODUCTS_FROM_API({commit}: {commit: Commit}, {currentPage, pageSize, saveState=true}: {currentPage: number, pageSize: number, saveState: boolean}) {
             const res = await DishesAPI.dishes(currentPage, pageSize);
             
-            if (res && res.status === 200 && res.data) {
+            if (res && res.status === 200 && res.data && saveState) {
                 commit('SET_PRODUCTS_TO_STATE', res.data);
             }
-
-            return res.data;
-        },
-
-        async GET_PRODUCTS_FROM_API({commit}: {commit: Commit}) {
-            const res = await DishesAPI.dishes();
             
-            if (res && res.status === 200 && res.data) {
-                commit('SET_PRODUCTS_TO_STATE', res.data);
-            }
-
             return res.data;
         },
 
