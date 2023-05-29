@@ -28,9 +28,9 @@ const checkoutGuard = (to: RouteLocationNormalized, from: RouteLocationNormalize
         next({name: 'cart'});
     }
 }
-const isAuthorized = localStorage.hasOwnProperty('token');
 
 const authGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    const isAuthorized = localStorage.hasOwnProperty('token');
     if (!isAuthorized) {
         next({ name: 'login' });
     } else {
@@ -39,6 +39,7 @@ const authGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, n
 }
 
 const managerAuthGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    const isAuthorized = localStorage.hasOwnProperty('token');
     if (!isAuthorized) {
         next({name: 'login'});
     } else if (localStorage.getItem('userRole') !== UserRoles.Admin) {
