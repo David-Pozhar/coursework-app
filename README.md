@@ -44,5 +44,23 @@
 ./server-api/config.example.js - example config file
 ```
 
+## Create Admin user to use manage dashboard
+```
+Edit the file with your user admin data
+./server-api/createAdmin.js
+...
+const USER_DATA = {
+    email: 'admin@food.ordering.app',
+    fullName: 'Admin',
+    password: 'adminAdmin123!',
+    isAdmin: true
+}
+...
+
+Run
+
+./server-api/node createAdmin.js
+```
+
 ### Customize configuration (storefront)
 See [Configuration Reference](https://cli.vuejs.org/config/).
