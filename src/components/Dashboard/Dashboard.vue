@@ -48,10 +48,6 @@
     export default defineComponent({
         name: 'Dashboard',
         components: {Header},
-        props: {},
-        data() {
-            return {}
-        }
     });
 </script>
 

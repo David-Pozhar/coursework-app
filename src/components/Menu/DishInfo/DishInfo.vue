@@ -1,10 +1,13 @@
 <template>
     <Header />
-    <div class="p-4 m-4 rounded-lg bg-slate-50">
+    <div class="p-4 pt-10 m-4 rounded-lg bg-slate-50">
         <div class="flex flex-col items-center justify-between">
-                <div class="w-80 h-80 flex items-center justify-center">
-                    <img v-if="dish.imageUrl" :src="dish.imageUrl" alt="img" class="w-40 h-40 rounded-xl object-covers">
-                    <img v-else src="../../../assets/img/pancake-home.png" alt="img">
+                <div class="w-80 h-auto flex items-center justify-center">
+                    <div v-if="isFetching" class="flex justify-center items-center">
+                        <img src="../../../assets/img/preloader.gif" alt="Loading...">
+                    </div>
+                    <img v-else-if="dish.imageUrl" :src="imageHostName + dish.imageUrl" alt="img" class="h-40 rounded-xl object-covers">
+                    <img v-else src="../../../assets/img/pancake-blueberry.png" alt="img">
                 </div>
                 <p class="flex items-center justify-center text-2xl font-bold text-gray-900">{{ dish.title }}</p>
             <p class="text-gray-600 mt-2">{{ dish.description }}</p>
@@ -24,6 +27,7 @@
     import Header from '@/components/Home/Header/Header.vue';
     import { mapActions } from 'vuex';
     import { IDish } from '@/models/IDish';
+    import { IMAGE_HOST_NAME } from '@/config';
 
     export default defineComponent({
         name:'DishInfo',
@@ -36,7 +40,9 @@
         },
         data() {
             return {
-                dish: {} as IDish
+                dish: {} as IDish,
+                imageHostName: IMAGE_HOST_NAME,
+                isFetching: true,
             }
         },
         methods: {
@@ -54,6 +60,7 @@
             const dish = await this.GET_ONE_DISH(this.id);
             if (dish) {
                 this.dish = dish;
+                this.isFetching = false;
             }
         }
     })

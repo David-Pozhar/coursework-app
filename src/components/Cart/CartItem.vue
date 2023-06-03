@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center border-b border-gray-200 py-4">
         <img class="w-16 h-16 object-cover rounded-md mr-4"
-            :src="cart_item_data.imageUrl"
+            :src="imageHostName + cart_item_data.imageUrl"
             :alt="cart_item_data.title"
         />
         <div class="flex-1">
@@ -37,16 +37,23 @@
 </template>
 
 <script lang="ts">
+    import { IMAGE_HOST_NAME } from '@/config';
     import { defineComponent } from 'vue';
+    import { ICart } from '@/models/ICart';
     
     export default defineComponent({
         name: 'CartItem',
         props: {
             cart_item_data: {
-                type: Object,
+                type: Object as () => ICart,
                 default() {
                     return {}
                 }
+            }
+        },
+        data() {
+            return {
+                imageHostName: IMAGE_HOST_NAME,
             }
         },
         methods: {
@@ -60,9 +67,9 @@
                 this.$emit('decrementQuantity')
             }
         },
-        mounted(): void {
+        mounted(this: { cart_item_data: ICart }): void {
             const cartItemData = this.cart_item_data;
-	        cartItemData.quantity = 1;
+            cartItemData.quantity = 1;
         }
         
     });

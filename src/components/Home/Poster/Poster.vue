@@ -11,17 +11,11 @@
                 </p>
 
                 <div class="home_btn">
-                    <!-- <button :disabled="true" class="px-4 py-3 bg-gradient-to-br from-orange-400 to-orange-500 rounded-lg hover:shadow-lg transition-all ease-in-out duration-100 text-white font-bold">
-                        Order Now
-                    </button> -->
-                    <!-- <router-link to="/menu" class="text-yellow-400 hover:text-yellow-500 font-bold text-decoration-line px-3">
-                        See Menu
-                    </router-link> -->
                 </div>
             </div>
 
             <div class="poster_img w-full md:w-2/3 flex justify-around">
-                <img src='../../../assets/img/pancake-home4.png' alt="pancake" class="max-h-96" />
+                <img src='../../../assets/img/pancake-strawberry.png' alt="pancake" class="max-h-96" />
             </div>
         </div>
     </div>

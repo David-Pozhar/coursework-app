@@ -53,10 +53,6 @@
 
     export default defineComponent({
         name: 'Header',
-        data() {
-            return {
-            }
-        },
         computed: {
             ...mapGetters('auth',[
                 'GET_USER_ROLE'
@@ -77,7 +73,6 @@
                 this.$router.push({name: 'home'});
             }
         },
-        mounted() {}
     });
 </script>
 

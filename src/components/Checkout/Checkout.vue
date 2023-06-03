@@ -19,7 +19,7 @@
                     v-for="item in CART" :key="item._id">
                         <div>
                             <img class="w-16 h-16 object-cover rounded-md mr-4"
-                                :src="item.imageUrl"
+                                :src="imageHostName + item.imageUrl"
                                 :alt="item.title"
                             />
                             <p class="text-lg font-semibold">{{ item.title }}</p>
@@ -75,13 +75,15 @@
     import { mapActions, mapGetters } from 'vuex';
     import { defineComponent } from 'vue';
     import { OrderCreation } from '@/models/IOrder';
+    import { IMAGE_HOST_NAME } from '@/config';
 
     export default defineComponent({
         components: { Header, CartItem },
         data() {
             return {
                 orderItems: [] as OrderCreation[],
-                showConfirmationModal: false
+                showConfirmationModal: false,
+                imageHostName: IMAGE_HOST_NAME,
             }
         },
         computed: {

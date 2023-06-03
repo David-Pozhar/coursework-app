@@ -3,8 +3,8 @@
         <div class="flex flex-col items-center justify-between">
             <router-link :to="{name: 'dishInfo', params:{id: product_data._id}}">
                 <div class="w-full flex items-center justify-center">
-                    <img v-if="product_data.imageUrl" :src="product_data.imageUrl" alt="img" class="w-40 h-40 rounded-xl object-covers">
-                    <img v-else src="../../../assets/img/pancake-home.png" alt="img">
+                    <img v-if="product_data.imageUrl" :src="imageHostName + product_data.imageUrl" alt="img" class="h-40 rounded-xl object-covers">
+                    <img v-else src="../../../assets/img/pancake-blueberry.png" alt="img">
                 </div>
                 <p class="flex items-center justify-center text-lg font-bold text-gray-900 mt-1">{{ product_data.title }}</p>
             </router-link>
@@ -24,6 +24,7 @@
     import { defineComponent } from 'vue';
     import { IDish } from '@/models/IDish';
     import { truncateText } from '@/components/common/TruncateText/truncateText';
+    import { IMAGE_HOST_NAME } from '@/config';
 
     export default defineComponent({
         name: 'MenuItem',
@@ -35,7 +36,7 @@
         },
         data() {
             return {
-                
+                imageHostName: IMAGE_HOST_NAME,
             }
         },
         methods: {

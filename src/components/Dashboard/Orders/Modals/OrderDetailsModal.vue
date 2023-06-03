@@ -6,7 +6,7 @@
                 <div v-for="order in order_data.orderItems" :key="order._id" class="mb-4">
                     <div class="flex items-center mb-2">
                         <img class="w-16 h-16 object-cover rounded-md mr-4" 
-                            src="https://assets.noshu.com/uploads/2022/03/Noshu-PancakeMix-LC-Hero-750px.png" 
+                            :src="imageHostName + order.dish.imageUrl" 
                             :alt="order.dish.title" />
                         <div>
                             <p class="text-lg font-semibold">{{ order.dish.title }}</p>
@@ -31,6 +31,7 @@
 </template>
 
 <script lang="ts">
+    import { IMAGE_HOST_NAME } from '@/config';
     import { IOrder } from '@/models/IOrder';
     import { defineComponent } from 'vue';
 
@@ -38,7 +39,8 @@
         name: 'OrderDetailsModal',
         data() {
             return {
-                showDetailsModal: this.showDetails
+                showDetailsModal: this.showDetails,
+                imageHostName: IMAGE_HOST_NAME
             }
         },
         props: {

@@ -1,6 +1,7 @@
 <template>
      <div class="w-1/3 text-white bg-gradient-to-t from-slate-600 to-transparent text-center">
-        <img src="../../../assets/img/pancake-home3.png" :alt="product_data.title" class="mx-auto w-40 h-40 "/>
+        <img v-if="product_data.imageUrl" :src="imageHostName + product_data.imageUrl" :alt="product_data.title" class="mx-auto h-40 "/>
+        <img v-else src="../../../assets/img/pancake-raspberry.png" :alt="product_data.title" class="mx-auto w-40 h-40 "/>
         <h2 class="pb-2 text-lg">{{ product_data.title }}</h2>
         <p class="mb-2 h-20 line-clamp-4">{{ product_data.description }}</p>
         <div class="flex justify-end">
@@ -16,6 +17,7 @@
 </template>
 
 <script lang="ts">
+    import { IMAGE_HOST_NAME } from '@/config';
     import { IDish } from '@/models/IDish';
     import { defineComponent } from 'vue';
     import { mapActions } from 'vuex';
@@ -27,6 +29,11 @@
                 type: Object as () => IDish,
                 default: () => ({}) 
             },
+        },
+        data() {
+            return {
+                imageHostName: IMAGE_HOST_NAME,
+            }
         },
         methods: {
             ...mapActions([
