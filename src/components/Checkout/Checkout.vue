@@ -87,7 +87,7 @@
             }
         },
         computed: {
-            ...mapGetters([
+            ...mapGetters('cart',[
                 'CART'
             ]) as {CART: () => ICart[]},
 
@@ -109,7 +109,7 @@
             ...mapActions('orders',[
                 'CREATE_ORDER',
             ]),
-            ...mapActions([
+            ...mapActions('cart',[
                 'DELETE_EVERYTHING_FROM_CART'
             ]),
             setOrderItems() {

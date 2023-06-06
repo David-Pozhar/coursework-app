@@ -57,7 +57,7 @@
             ...mapGetters('auth',[
                 'GET_USER_ROLE'
             ]),
-            ...mapGetters([
+            ...mapGetters('cart',[
                 'CART',
             ]),
             checkUserRole(): string {

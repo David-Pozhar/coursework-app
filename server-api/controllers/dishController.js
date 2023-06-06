@@ -3,24 +3,6 @@ import config from '../config.js';
 
 const DishController = {};
 
-// DishController.getLastTags = async (req, res) => {
-//     try {
-//         const posts = await DishModel.find().limit(5).exec();
-
-//         const tags = posts
-//             .map((obj) => obj.tags)
-//             .flat()
-//             .slice(0, 5);
-
-//         res.json(tags);
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({
-//             message: 'Failed to get tags',
-//         });
-//     }
-// };
-
 DishController.getAll = async (req, res) => {
     try {
         const page = parseInt(req.query.page, 10) - 1 || 0;

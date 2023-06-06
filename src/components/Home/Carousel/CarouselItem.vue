@@ -36,7 +36,7 @@
             }
         },
         methods: {
-            ...mapActions([
+            ...mapActions('cart',[
                 'ADD_TO_CART',
             ]),
             addProductToCart() {

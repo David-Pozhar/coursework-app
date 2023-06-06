@@ -28,9 +28,6 @@ export const authModule = {
         }
     },
     getters: {
-        // getUserRole(state: authState) {
-        //     return state.credentials.userRole
-        // }
         GET_USER_ROLE(state: authState) {
             return state.credentials.userRole
         }
@@ -40,10 +37,6 @@ export const authModule = {
             state.credentials.token = token
             localStorage.setItem('token', token)
         },
-        // SET_USER_ROLE(state: authState, userRole: string) {
-        //     state.credentials.userRole = userRole
-        //     localStorage.setItem('userRole', userRole)
-        // },
         SET_USER_ROLE(state: authState, isAdmin: boolean) {
             if (isAdmin) {
                 state.credentials.userRole = UserRoles.Admin
@@ -57,17 +50,10 @@ export const authModule = {
             state.credentials.token = null
             localStorage.removeItem('token')
         },
-        // DELETE_USER_ROLE(state: authState) {
-        //     state.credentials.userRole = null
-        //     localStorage.removeItem('userRole')
-        // }
         DELETE_USER_ROLE(state: authState) {
             state.credentials.userRole = UserRoles.Guest
             localStorage.removeItem('userRole')
         },
-
-        
-
     },
 
     actions: {

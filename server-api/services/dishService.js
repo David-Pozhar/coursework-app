@@ -55,7 +55,6 @@ dishService.create = async function (body, userId) {
             price: body.price,
             category: body.category,
             imageUrl: body.imageUrl,
-            // tags: body.tags.split(','),
             adminCreator: userId
         });
 
@@ -77,7 +76,6 @@ dishService.update = async function (dishId, body) {
                 price: body.price,
                 category: body.category,
                 imageUrl: body.imageUrl,
-                // tags: body.tags.split(',')
             }
         );
     } catch (err) {

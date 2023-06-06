@@ -49,7 +49,7 @@
             CartItem, Header
         }, 
         methods: {
-            ...mapActions([
+            ...mapActions('cart', [
                 'DELETE_FROM_CART',
                 'INCREMENT_QUANTITY',
                 'DECREMENT_QUANTITY'
@@ -66,7 +66,7 @@
             }
         },
         computed: {
-            ...mapGetters([
+            ...mapGetters('cart', [
                 'CART'
             ]) as {CART: () => ICart[]},
 

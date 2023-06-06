@@ -46,7 +46,7 @@
             }
         },
         methods: {
-            ...mapActions([
+            ...mapActions('cart',[
                 'ADD_TO_CART',
             ]),
             ...mapActions('dishes',[

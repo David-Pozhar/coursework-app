@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { store } from '@/vuex/store'
+import State, { store } from '@/vuex/store'
 import { RouteRecordRaw, createRouter, createWebHistory, RouteLocationNormalized, NavigationGuardNext  } from 'vue-router'
 import DishInfo from '../components/Menu/DishInfo/DishInfo.vue'
 import Cart from '../components/Cart/Cart.vue'
@@ -22,10 +22,11 @@ import {UserRoles} from '../vuex/modules/AuthModule/authModule'
 
 
 const checkoutGuard = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-    if (store.state.cart.length) {
-        next();
+    const cartState = (store.state as State).cart;
+    if (cartState.cart.length) {
+      next();
     } else {
-        next({name: 'cart'});
+      next({ name: 'cart' });
     }
 }
 

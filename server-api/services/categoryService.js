@@ -36,7 +36,6 @@ categoryService.create = async function (body) {
         const doc = new CategoryModel({
             title: body.title,
             description: body.description || '',
-            // imageUrl: body.imageUrl
         });
 
         return await doc.save();
@@ -54,7 +53,6 @@ categoryService.update = async function (categoryId, body) {
             {
                 title: body.title,
                 description: body.description,
-                // imageUrl: body.imageUrl
             }
         );
     } catch (err) {
